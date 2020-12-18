@@ -1,0 +1,80 @@
+package com.staticsyntax.progressiveminer.data;
+
+import com.staticsyntax.progressiveminer.ProgressiveMiner;
+import org.osbot.rs07.api.ui.Skill;
+
+public enum Pickaxe {
+    BRONZE("Bronze pickaxe", 1, 1),
+    IRON("Iron pickaxe", 1, 1),
+    STEEL("Steel pickaxe", 6, 5),
+    BLACK("Black pickaxe", 11, 10),
+    MITHRIL("Mithril pickaxe", 21, 20),
+    ADAMANT("Adamant pickaxe", 31, 30),
+    RUNE("Rune pickaxe", 41, 40);
+
+    private String name;
+    private int miningLevel, attackLevel;
+
+    Pickaxe(String name, int miningLevel, int attackLevel) {
+        this.name = name;
+        this.miningLevel = miningLevel;
+        this.attackLevel = attackLevel;
+    }
+
+    public boolean canUse() {
+        return canUse(this);
+    }
+
+    public static boolean canUse(Pickaxe pickaxe) {
+        return ProgressiveMiner.getApi().getSkills().getVirtualLevel(Skill.MINING) >= pickaxe.miningLevel;
+    }
+
+    public boolean canWield() {
+        return canWield(this);
+    }
+
+    public static boolean canWield(Pickaxe pickaxe) {
+        return ProgressiveMiner.getApi().getSkills().getVirtualLevel(Skill.ATTACK) >= pickaxe.attackLevel;
+    }
+
+    public static boolean playerHasUsable() {
+        for(int i = Pickaxe.values().length - 1; i >= 0; i--) {
+            if((ProgressiveMiner.getApi().getInventory().contains(Pickaxe.values()[i].getName())
+            || ProgressiveMiner.getApi().getEquipment().contains(Pickaxe.values()[i].getName()))
+            && ProgressiveMiner.getApi().getSkills().getVirtualLevel(Skill.MINING) >= Pickaxe.values()[i].getMiningLevel()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static Pickaxe getBestUsableBanked() {
+        for(int i = Pickaxe.values().length - 1; i >= 0; i--) {
+            if(ProgressiveMiner.getApi().getBank().contains(Pickaxe.values()[i].getName())
+            && ProgressiveMiner.getApi().getSkills().getVirtualLevel(Skill.MINING) >= Pickaxe.values()[i].getMiningLevel()) {
+                return Pickaxe.values()[i];
+            }
+        }
+        return null;
+    }
+
+    public static String[] getNames() {
+        String[] names = new String[Pickaxe.values().length];
+        for(int i = 0; i < Pickaxe.values().length; i++) {
+            names[i] = Pickaxe.values()[i].getName();
+        }
+        return names;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getMiningLevel() {
+        return miningLevel;
+    }
+
+    public int getAttackLevel() {
+        return attackLevel;
+    }
+}
