@@ -1,6 +1,7 @@
 package com.staticsyntax.progressiveminer.data;
 
 import com.staticsyntax.progressiveminer.ProgressiveMiner;
+import org.jetbrains.annotations.Nullable;
 import org.osbot.rs07.api.ui.Skill;
 
 public enum Pickaxe {
@@ -39,19 +40,19 @@ public enum Pickaxe {
 
     public static boolean playerHasUsable() {
         for(int i = Pickaxe.values().length - 1; i >= 0; i--) {
-            if((ProgressiveMiner.getApi().getInventory().contains(Pickaxe.values()[i].getName())
-            || ProgressiveMiner.getApi().getEquipment().contains(Pickaxe.values()[i].getName()))
-            && ProgressiveMiner.getApi().getSkills().getVirtualLevel(Skill.MINING) >= Pickaxe.values()[i].getMiningLevel()) {
+            if((ProgressiveMiner.getApi().getInventory().contains(Pickaxe.values()[i].name)
+            || ProgressiveMiner.getApi().getEquipment().contains(Pickaxe.values()[i].name))
+            && ProgressiveMiner.getApi().getSkills().getVirtualLevel(Skill.MINING) >= Pickaxe.values()[i].miningLevel) {
                 return true;
             }
         }
         return false;
     }
 
-    public static Pickaxe getBestUsableBanked() {
+    public static @Nullable Pickaxe getBestUsableBanked() {
         for(int i = Pickaxe.values().length - 1; i >= 0; i--) {
-            if(ProgressiveMiner.getApi().getBank().contains(Pickaxe.values()[i].getName())
-            && ProgressiveMiner.getApi().getSkills().getVirtualLevel(Skill.MINING) >= Pickaxe.values()[i].getMiningLevel()) {
+            if(ProgressiveMiner.getApi().getBank().contains(Pickaxe.values()[i].name)
+            && ProgressiveMiner.getApi().getSkills().getVirtualLevel(Skill.MINING) >= Pickaxe.values()[i].miningLevel) {
                 return Pickaxe.values()[i];
             }
         }
@@ -61,7 +62,7 @@ public enum Pickaxe {
     public static String[] getNames() {
         String[] names = new String[Pickaxe.values().length];
         for(int i = 0; i < Pickaxe.values().length; i++) {
-            names[i] = Pickaxe.values()[i].getName();
+            names[i] = Pickaxe.values()[i].name;
         }
         return names;
     }
