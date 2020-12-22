@@ -18,6 +18,8 @@ public enum Location {
     VARROCK_WEST_BANK(Banks.VARROCK_WEST, true),
     GRAND_EXCHANGE(Banks.GRAND_EXCHANGE, true),
 
+    CUSTOM(new Area(0, 0, 0, 0),
+            new Rock[] {  }),
     LUMBRIDGE_EAST(new Area(3221, 3149, 3231, 3143),
             new Rock[] { Rock.COPPER, Rock.TIN }),
     LUMBRIDGE_WEST(new Area(3149, 3153, 3142, 3143),
@@ -96,6 +98,14 @@ public enum Location {
             else if(!loc.isBank()) areas.add(loc.getArea());
         }
         return areas.toArray(new Area[0]);
+    }
+
+    public void setCustomMiningArea() {
+        //Location.CUSTOM.area = area;
+        //Location.CUSTOM.rocks = rocks;
+        //Set the Custom Area relative to the players position using a custom radius.
+        //Scan the selected Area for Rock IDs and add them to an ArrayList.
+        //Convert the ArrayList into an Rock[] and return it.
     }
 
     public static boolean isPlayerSafe(Location loc) {

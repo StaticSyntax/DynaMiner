@@ -1,12 +1,15 @@
 package com.staticsyntax.progressiveminer;
 
 import com.staticsyntax.progressiveminer.tasks.*;
+import com.staticsyntax.progressiveminer.ui.Settings;
 import org.osbot.rs07.api.ui.Message;
 import org.osbot.rs07.script.MethodProvider;
 import org.osbot.rs07.script.Script;
 import org.osbot.rs07.script.ScriptManifest;
 
+import javax.swing.*;
 import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 @ScriptManifest(logo = "",
@@ -16,18 +19,23 @@ import java.util.ArrayList;
         author = "StaticSyntax")
 public class ProgressiveMiner extends Script {
 
+    private static boolean running = false;
     private static MethodProvider api;
+    private Settings settings = new Settings();
     private ArrayList<Task> tasks = new ArrayList<>();
 
     @Override
     public void onStart() {
         api = this;
-        initialiseTasks();
+        initSettings();
+        initTasks();
     }
 
     @Override
     public int onLoop() {
-        tasks.forEach(task -> task.run());
+        if(running) {
+            tasks.forEach(task -> task.run());
+        }
         return random(750, 1550);
     }
 
@@ -41,8 +49,27 @@ public class ProgressiveMiner extends Script {
 
     }
 
-    private void initialiseTasks() {
+    private void initSettings() {
+        try {
+            SwingUtilities.invokeAndWait(() -> settings.open());
+        } catch (InterruptedException | InvocationTargetException e) {
+            e.printStackTrace();
+            stop(false);
+            return;
+        }
+
+        if (!running) {
+            stop(false);
+        }
+    }
+
+    private void initTasks() {
         tasks.add(new GetPickaxe(this, this));
+        tasks.add(new BankJunk(this));
+    }
+
+    public static void setRunning(boolean running) {
+        ProgressiveMiner.running = running;
     }
 
     public static MethodProvider getApi() {

@@ -3,7 +3,7 @@ package com.staticsyntax.progressiveminer.tasks;
 import com.staticsyntax.progressiveminer.ProgressiveMiner;
 import com.staticsyntax.progressiveminer.data.Location;
 import com.staticsyntax.progressiveminer.data.Pickaxe;
-import com.staticsyntax.progressiveminer.utils.CommonMethods;
+import com.staticsyntax.progressiveminer.utils.Utils;
 import org.osbot.rs07.event.WebWalkEvent;
 import org.osbot.rs07.event.webwalk.PathPreferenceProfile;
 import org.osbot.rs07.script.MethodProvider;
@@ -40,7 +40,7 @@ public class GetPickaxe extends Task {
                 script.stop(false);
             }
         } else {
-            CommonMethods.openBank();
+            Utils.openBank();
         }
     }
 }
