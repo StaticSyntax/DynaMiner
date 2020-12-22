@@ -56,6 +56,8 @@ public enum Location {
             new Rock[] { Rock.IRON, Rock.COAL, Rock.MITHRIL, Rock.ADAMANT }),
     WILDERNESS_RUNITE(new Area(3058, 3886, 3061, 3883), 34,
             new Rock[] { Rock.RUNITE }),
+    CLOSEST(new Area(0, 0, 0, 0),
+            new Rock[] {  }),
     CUSTOM(new Area(0, 0, 0, 0),
             new Rock[] {  });
 

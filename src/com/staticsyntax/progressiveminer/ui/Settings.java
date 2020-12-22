@@ -1,5 +1,6 @@
 package com.staticsyntax.progressiveminer.ui;
 
+import com.staticsyntax.progressiveminer.ProgressiveMiner;
 import com.staticsyntax.progressiveminer.data.Location;
 import com.staticsyntax.progressiveminer.data.Rock;
 
@@ -107,6 +108,10 @@ public class Settings implements ItemListener, ChangeListener {
 
         JButton startButton = new JButton("Start");
         startButton.setBackground(Color.CYAN);
+        startButton.addActionListener(e -> {
+            ProgressiveMiner.setRunning(true);
+            close();
+        });
         mainPanel.add(startButton);
         startButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
