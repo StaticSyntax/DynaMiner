@@ -18,8 +18,6 @@ public enum Location {
     VARROCK_WEST_BANK(Banks.VARROCK_WEST, true),
     GRAND_EXCHANGE(Banks.GRAND_EXCHANGE, true),
 
-    CUSTOM(new Area(0, 0, 0, 0),
-            new Rock[] {  }),
     LUMBRIDGE_EAST(new Area(3221, 3149, 3231, 3143),
             new Rock[] { Rock.COPPER, Rock.TIN }),
     LUMBRIDGE_WEST(new Area(3149, 3153, 3142, 3143),
@@ -57,7 +55,9 @@ public enum Location {
     WILDERNESS_BANDIT_CAMP(new Area(3073, 3747, 3102, 3775), 28,
             new Rock[] { Rock.IRON, Rock.COAL, Rock.MITHRIL, Rock.ADAMANT }),
     WILDERNESS_RUNITE(new Area(3058, 3886, 3061, 3883), 34,
-            new Rock[] { Rock.RUNITE });
+            new Rock[] { Rock.RUNITE }),
+    CUSTOM(new Area(0, 0, 0, 0),
+            new Rock[] {  });
 
     Location(Area area, boolean bank) {
         construct(area, bank, 0, new Rock[0]);
@@ -98,6 +98,14 @@ public enum Location {
             else if(!loc.isBank()) areas.add(loc.getArea());
         }
         return areas.toArray(new Area[0]);
+    }
+
+    public static Location[] getMiningLocations() {
+        List<Location> locations = new ArrayList<>();
+        for(Location loc : Location.values()) {
+            if(!loc.isBank()) locations.add(loc);
+        }
+        return locations.toArray(new Location[0]);
     }
 
     public void setCustomMiningArea() {

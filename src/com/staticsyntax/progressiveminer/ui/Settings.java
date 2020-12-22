@@ -5,12 +5,20 @@ import com.staticsyntax.progressiveminer.data.Rock;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
-public class Settings {
+public class Settings implements ItemListener, ChangeListener {
 
     private final JDialog mainDialog;
-    private final Dimension fillerDimension = new Dimension(0, 10);
+    private final Dimension fillerDimension = new Dimension(0, 25);
+    private JComboBox<Location> locationComboBox;
+    private JPanel customLocationPanel;
+    private JSlider radiusSlider;
+    private JLabel radiusValueLabel;
 
     public Settings() {
         mainDialog = new JDialog();
@@ -40,13 +48,14 @@ public class Settings {
         JLabel targetLocationLabel = new JLabel("Target Location:");
         targetLocationPanel.add(targetLocationLabel);
         targetLocationLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        JComboBox<Location> locationComboBox = new JComboBox<>(Location.values());
+        locationComboBox = new JComboBox<>(Location.getMiningLocations());
+        locationComboBox.addItemListener(this);
         targetLocationPanel.add(locationComboBox);
         mainPanel.add(targetLocationPanel);
 
         mainPanel.add(new Box.Filler(fillerDimension, fillerDimension, fillerDimension));
 
-        JPanel customLocationPanel = new JPanel();
+        customLocationPanel = new JPanel();
         customLocationPanel.setLayout(new BoxLayout(customLocationPanel, BoxLayout.PAGE_AXIS));
         JLabel customLocationLabel = new JLabel("Custom Location:");
         customLocationPanel.add(customLocationLabel);
@@ -54,14 +63,20 @@ public class Settings {
         mainPanel.add(customLocationPanel);
 
         JPanel radiusPanel = new JPanel();
-        radiusPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        radiusPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         JLabel radiusLabel = new JLabel("Radius:");
         radiusPanel.add(radiusLabel);
-        JSlider radiusSlider = new JSlider(1, 10);
+        radiusSlider = new JSlider(1, 10);
+        radiusSlider.setBackground(Color.CYAN);
+        radiusSlider.addChangeListener(this);
         radiusPanel.add(radiusSlider);
         JButton radiusButton = new JButton("Set");
         radiusPanel.add(radiusButton);
         customLocationPanel.add(radiusPanel);
+
+        radiusValueLabel = new JLabel(String.valueOf(radiusSlider.getValue()));
+        customLocationPanel.add(radiusValueLabel);
+        radiusValueLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         mainPanel.add(new Box.Filler(fillerDimension, fillerDimension, fillerDimension));
 
@@ -88,6 +103,14 @@ public class Settings {
         }
         targetRocksPanel.add(rockSelectionPanel);
 
+        mainPanel.add(new Box.Filler(fillerDimension, fillerDimension, fillerDimension));
+
+        JButton startButton = new JButton("Start");
+        startButton.setBackground(Color.CYAN);
+        mainPanel.add(startButton);
+        startButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        setCustomLocationPanelActive(false);
         mainDialog.pack();
     }
 
@@ -98,5 +121,26 @@ public class Settings {
     public void close() {
         mainDialog.setVisible(false);
         mainDialog.dispose();
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent e) {
+        radiusValueLabel.setText(String.valueOf(radiusSlider.getValue()));
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        setCustomLocationPanelActive(locationComboBox.getSelectedItem() == Location.CUSTOM);
+    }
+
+    private void setCustomLocationPanelActive(boolean active) {
+        for(Component component : customLocationPanel.getComponents()) {
+            component.setEnabled(active);
+            if(component instanceof JPanel) {
+                for(Component childComponent : ((JPanel) component).getComponents()) {
+                    childComponent.setEnabled(active);
+                }
+            }
+        }
     }
 }
