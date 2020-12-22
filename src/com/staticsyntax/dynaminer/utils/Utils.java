@@ -1,4 +1,4 @@
-package com.staticsyntax.progressiveminer.utils;
+package com.staticsyntax.dynaminer.utils;
 
 import java.util.Arrays;
 

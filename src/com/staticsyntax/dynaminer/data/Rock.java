@@ -1,6 +1,6 @@
-package com.staticsyntax.progressiveminer.data;
+package com.staticsyntax.dynaminer.data;
 
-import com.staticsyntax.progressiveminer.ProgressiveMiner;
+import com.staticsyntax.dynaminer.DynaMiner;
 import org.osbot.rs07.api.ui.Skill;
 
 public enum Rock {
@@ -31,7 +31,7 @@ public enum Rock {
     }
 
     public static boolean canMine(Rock rock) {
-        return ProgressiveMiner.getApi().getSkills().getVirtualLevel(Skill.MINING) >= rock.miningLevel;
+        return DynaMiner.getApi().getSkills().getVirtualLevel(Skill.MINING) >= rock.miningLevel;
     }
 
     public int[] getIds() {

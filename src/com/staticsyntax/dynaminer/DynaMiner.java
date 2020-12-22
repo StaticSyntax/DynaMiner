@@ -1,7 +1,7 @@
-package com.staticsyntax.progressiveminer;
+package com.staticsyntax.dynaminer;
 
-import com.staticsyntax.progressiveminer.tasks.*;
-import com.staticsyntax.progressiveminer.ui.Settings;
+import com.staticsyntax.dynaminer.tasks.*;
+import com.staticsyntax.dynaminer.ui.Settings;
 import org.osbot.rs07.api.ui.Message;
 import org.osbot.rs07.script.MethodProvider;
 import org.osbot.rs07.script.Script;
@@ -13,11 +13,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 @ScriptManifest(logo = "",
-        name = "Progressive F2P Miner",
-        info = "A progressive mining script for use in free-to-play worlds.",
+        name = "DynaMiner",
+        info = "",
         version = 0.1,
         author = "StaticSyntax")
-public class ProgressiveMiner extends Script {
+public class DynaMiner extends Script {
 
     private static boolean running = false;
     private static MethodProvider api;
@@ -69,7 +69,7 @@ public class ProgressiveMiner extends Script {
     }
 
     public static void setRunning(boolean running) {
-        ProgressiveMiner.running = running;
+        DynaMiner.running = running;
     }
 
     public static MethodProvider getApi() {

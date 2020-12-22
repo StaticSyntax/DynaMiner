@@ -1,6 +1,6 @@
-package com.staticsyntax.progressiveminer.data;
+package com.staticsyntax.dynaminer.data;
 
-import com.staticsyntax.progressiveminer.ProgressiveMiner;
+import com.staticsyntax.dynaminer.DynaMiner;
 import org.jetbrains.annotations.Nullable;
 import org.osbot.rs07.api.ui.Skill;
 
@@ -27,7 +27,7 @@ public enum Pickaxe {
     }
 
     public static boolean canUse(Pickaxe pickaxe) {
-        return ProgressiveMiner.getApi().getSkills().getVirtualLevel(Skill.MINING) >= pickaxe.miningLevel;
+        return DynaMiner.getApi().getSkills().getVirtualLevel(Skill.MINING) >= pickaxe.miningLevel;
     }
 
     public boolean canWield() {
@@ -35,14 +35,14 @@ public enum Pickaxe {
     }
 
     public static boolean canWield(Pickaxe pickaxe) {
-        return ProgressiveMiner.getApi().getSkills().getVirtualLevel(Skill.ATTACK) >= pickaxe.attackLevel;
+        return DynaMiner.getApi().getSkills().getVirtualLevel(Skill.ATTACK) >= pickaxe.attackLevel;
     }
 
     public static boolean playerHasUsable() {
         for(int i = Pickaxe.values().length - 1; i >= 0; i--) {
-            if((ProgressiveMiner.getApi().getInventory().contains(Pickaxe.values()[i].name)
-            || ProgressiveMiner.getApi().getEquipment().contains(Pickaxe.values()[i].name))
-            && ProgressiveMiner.getApi().getSkills().getVirtualLevel(Skill.MINING) >= Pickaxe.values()[i].miningLevel) {
+            if((DynaMiner.getApi().getInventory().contains(Pickaxe.values()[i].name)
+            || DynaMiner.getApi().getEquipment().contains(Pickaxe.values()[i].name))
+            && DynaMiner.getApi().getSkills().getVirtualLevel(Skill.MINING) >= Pickaxe.values()[i].miningLevel) {
                 return true;
             }
         }
@@ -51,8 +51,8 @@ public enum Pickaxe {
 
     public static @Nullable Pickaxe getBestUsableBanked() {
         for(int i = Pickaxe.values().length - 1; i >= 0; i--) {
-            if(ProgressiveMiner.getApi().getBank().contains(Pickaxe.values()[i].name)
-            && ProgressiveMiner.getApi().getSkills().getVirtualLevel(Skill.MINING) >= Pickaxe.values()[i].miningLevel) {
+            if(DynaMiner.getApi().getBank().contains(Pickaxe.values()[i].name)
+            && DynaMiner.getApi().getSkills().getVirtualLevel(Skill.MINING) >= Pickaxe.values()[i].miningLevel) {
                 return Pickaxe.values()[i];
             }
         }

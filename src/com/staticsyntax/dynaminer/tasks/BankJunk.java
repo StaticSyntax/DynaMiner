@@ -1,8 +1,8 @@
-package com.staticsyntax.progressiveminer.tasks;
+package com.staticsyntax.dynaminer.tasks;
 
-import com.staticsyntax.progressiveminer.data.Pickaxe;
-import com.staticsyntax.progressiveminer.data.Rock;
-import com.staticsyntax.progressiveminer.utils.Utils;
+import com.staticsyntax.dynaminer.data.Pickaxe;
+import com.staticsyntax.dynaminer.data.Rock;
+import com.staticsyntax.dynaminer.utils.Utils;
 import org.osbot.rs07.script.MethodProvider;
 
 public class BankJunk extends Task {

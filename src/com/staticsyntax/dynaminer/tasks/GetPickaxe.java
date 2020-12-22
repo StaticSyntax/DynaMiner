@@ -1,8 +1,8 @@
-package com.staticsyntax.progressiveminer.tasks;
+package com.staticsyntax.dynaminer.tasks;
 
-import com.staticsyntax.progressiveminer.ProgressiveMiner;
-import com.staticsyntax.progressiveminer.data.Location;
-import com.staticsyntax.progressiveminer.data.Pickaxe;
+import com.staticsyntax.dynaminer.DynaMiner;
+import com.staticsyntax.dynaminer.data.Location;
+import com.staticsyntax.dynaminer.data.Pickaxe;
 import org.osbot.rs07.event.WebWalkEvent;
 import org.osbot.rs07.event.webwalk.PathPreferenceProfile;
 import org.osbot.rs07.script.MethodProvider;
@@ -30,7 +30,7 @@ public class GetPickaxe extends Task {
     @Override
     public void process() {
         webWalkEvent.setEnergyThreshold(MethodProvider.random(1, 10));
-        ProgressiveMiner.getApi().execute(webWalkEvent);
+        DynaMiner.getApi().execute(webWalkEvent);
         if(api.getBank().isOpen()) {
             if(Pickaxe.getBestUsableBanked() != null) {
                 api.getBank().withdraw(Pickaxe.getBestUsableBanked().getName(), 1);
@@ -40,7 +40,7 @@ public class GetPickaxe extends Task {
             }
         } else {
             try {
-                ProgressiveMiner.getApi().getBank().open();
+                DynaMiner.getApi().getBank().open();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

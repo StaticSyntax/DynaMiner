@@ -1,4 +1,4 @@
-package com.staticsyntax.progressiveminer.tasks;
+package com.staticsyntax.dynaminer.tasks;
 
 import org.osbot.rs07.script.MethodProvider;
 
