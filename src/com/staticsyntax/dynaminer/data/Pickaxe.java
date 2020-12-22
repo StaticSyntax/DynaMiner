@@ -11,7 +11,12 @@ public enum Pickaxe {
     BLACK("Black pickaxe", 11, 10),
     MITHRIL("Mithril pickaxe", 21, 20),
     ADAMANT("Adamant pickaxe", 31, 30),
-    RUNE("Rune pickaxe", 41, 40);
+    RUNE("Rune pickaxe", 41, 40),
+    DRAGON("Dragon pickaxe", 61, 60),
+    DRAGON_OR("Dragon pickaxe (or)", 61, 60),
+    INFERNAL("Infernal pickaxe", 61, 60),
+    THIRD_AGE("3rd age pickaxe", 61, 65),
+    CRYSTAL("Crystal pickaxe", 71, 70);
 
     private String name;
     private int miningLevel, attackLevel;
