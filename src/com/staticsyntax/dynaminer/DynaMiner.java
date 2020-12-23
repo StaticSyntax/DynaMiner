@@ -68,6 +68,7 @@ public class DynaMiner extends Script {
         tasks.add(new BankJunk(this));
         tasks.add(new UpgradePickaxe(this));
         tasks.add(new WieldPickaxe(this));
+        tasks.add(new PathToMiningLocation(this));
     }
 
     public static void setRunning(boolean running) {
