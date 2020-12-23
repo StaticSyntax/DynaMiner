@@ -15,7 +15,7 @@ public class PathToMiningLocation extends Task {
 
     @Override
     public boolean canProcess() {
-        return Pickaxe.playerHasUsable() && !Location.MINING.getArea().contains(api.myPlayer());
+        return Pickaxe.playerHasUsable() && !Location.MINING.getArea().contains(api.myPlayer()) && !api.getInventory().isFull();
     }
 
     @Override

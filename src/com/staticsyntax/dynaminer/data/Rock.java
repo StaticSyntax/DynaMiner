@@ -4,6 +4,7 @@ import com.staticsyntax.dynaminer.DynaMiner;
 import org.osbot.rs07.api.ui.Skill;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public enum Rock {
     ESSENCE(new int[] {34773},
@@ -97,6 +98,15 @@ public enum Rock {
 
     public int getMiningLevel() {
         return miningLevel;
+    }
+
+    public static Rock[] getTargets() {
+        ArrayList<Rock> targetRocks = new ArrayList<>();
+        for(Rock rock : Rock.values()) {
+            if(rock.isTarget() && rock.canMine()) targetRocks.add(rock);
+        }
+        Collections.reverse(targetRocks);
+        return targetRocks.toArray(new Rock[0]);
     }
 
     public boolean isTarget() {
