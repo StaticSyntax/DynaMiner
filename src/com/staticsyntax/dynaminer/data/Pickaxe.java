@@ -1,7 +1,6 @@
 package com.staticsyntax.dynaminer.data;
 
 import com.staticsyntax.dynaminer.DynaMiner;
-import org.jetbrains.annotations.Nullable;
 import org.osbot.rs07.api.ui.Skill;
 
 public enum Pickaxe {
@@ -54,7 +53,7 @@ public enum Pickaxe {
         return false;
     }
 
-    public static @Nullable Pickaxe getBestUsableBanked() {
+    public static Pickaxe getBestUsableBanked() {
         for(int i = Pickaxe.values().length - 1; i >= 0; i--) {
             if(DynaMiner.getApi().getBank().contains(Pickaxe.values()[i].name)
             && DynaMiner.getApi().getSkills().getVirtualLevel(Skill.MINING) >= Pickaxe.values()[i].miningLevel) {
