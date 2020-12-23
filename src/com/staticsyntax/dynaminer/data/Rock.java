@@ -55,7 +55,7 @@ public enum Rock {
             new String[] {"Runite ore"},
             85),
     AMETHYST(new int[] {30371, 30372},
-            new String[] {"Amethyst"},
+            new String[] {"Amethyst", "Unidentified minerals"},
             92);
 
     private int[] ids;
