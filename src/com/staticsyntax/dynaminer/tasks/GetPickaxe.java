@@ -3,8 +3,8 @@ package com.staticsyntax.dynaminer.tasks;
 import com.staticsyntax.dynaminer.DynaMiner;
 import com.staticsyntax.dynaminer.data.Location;
 import com.staticsyntax.dynaminer.data.Pickaxe;
+import com.staticsyntax.dynaminer.utils.Utils;
 import org.osbot.rs07.event.WebWalkEvent;
-import org.osbot.rs07.event.webwalk.PathPreferenceProfile;
 import org.osbot.rs07.script.MethodProvider;
 import org.osbot.rs07.script.Script;
 
@@ -17,9 +17,7 @@ public class GetPickaxe extends Task {
         super(api);
         this.script = script;
         webWalkEvent = new WebWalkEvent(Location.getBanks());
-        PathPreferenceProfile ppp = new PathPreferenceProfile();
-        ppp.setAllowTeleports(true);
-        webWalkEvent.setPathPreferenceProfile(ppp);
+        webWalkEvent.setPathPreferenceProfile(Utils.getStandardPathPreferenceProfile());
     }
 
     @Override
