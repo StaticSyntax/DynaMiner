@@ -1,5 +1,6 @@
 package com.staticsyntax.dynaminer.data;
 
+import com.staticsyntax.dynaminer.DynaMiner;
 import org.osbot.rs07.api.map.Area;
 import org.osbot.rs07.api.map.constants.Banks;
 
@@ -64,7 +65,12 @@ public enum Location {
     }
 
     public static void setMiningArea() {
-
+        int x1, y1, x2, y2;
+        x1 = DynaMiner.getApi().myPosition().getX() - DynaMiner.getMiningSettings().getRadius();
+        y1 = DynaMiner.getApi().myPosition().getY() + DynaMiner.getMiningSettings().getRadius();
+        x2 = DynaMiner.getApi().myPosition().getX() + DynaMiner.getMiningSettings().getRadius();
+        y2 = DynaMiner.getApi().myPosition().getY() - DynaMiner.getMiningSettings().getRadius();
+        Location.MINING.area = new Area(x1, y1, x2, y2);
     }
 
     public Area getArea() {

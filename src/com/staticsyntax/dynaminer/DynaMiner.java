@@ -21,7 +21,7 @@ public class DynaMiner extends Script {
 
     private static boolean running = false;
     private static MethodProvider api;
-    private Settings settings = new Settings();
+    private static Settings settings = new Settings();
     private ArrayList<Task> tasks = new ArrayList<>();
 
     @Override
@@ -74,5 +74,9 @@ public class DynaMiner extends Script {
 
     public static MethodProvider getApi() {
         return api;
+    }
+
+    public static Settings getMiningSettings() {
+        return settings;
     }
 }

@@ -131,7 +131,7 @@ public class Settings implements ChangeListener {
         return powerMining;
     }
 
-    public int getMiningRadius() {
+    public int getRadius() {
         return radiusSlider.getValue();
     }
 }
