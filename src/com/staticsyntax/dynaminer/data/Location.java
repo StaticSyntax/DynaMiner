@@ -4,6 +4,8 @@ import com.staticsyntax.dynaminer.DynaMiner;
 import org.osbot.rs07.api.map.Area;
 import org.osbot.rs07.api.map.constants.Banks;
 
+import java.util.ArrayList;
+
 public enum Location {
     MINING(new Area(-1, -1, -1, -1), false),
     AL_KHARID(Banks.AL_KHARID, false),
@@ -59,15 +61,15 @@ public enum Location {
     private boolean membersOnly;
 
     public static Area[] getBanks(boolean includeMembersBanks) {
-        Area[] areas = new Area[Location.values().length - 1];
+        ArrayList<Area> bankAreas = new ArrayList<>();
         for(int i = 1; i < Location.values().length; i++) {
             if(includeMembersBanks) {
-                areas[i-1] = Location.values()[i].getArea();
+                bankAreas.add(Location.values()[i].getArea());
             } else {
-                if(!Location.values()[i].membersOnly) areas[i-1] = Location.values()[i].getArea();
+                if(!Location.values()[i].membersOnly) bankAreas.add(Location.values()[i].getArea());
             }
         }
-        return areas;
+        return bankAreas.toArray(new Area[0]);
     }
 
     public static void setMiningArea() {
