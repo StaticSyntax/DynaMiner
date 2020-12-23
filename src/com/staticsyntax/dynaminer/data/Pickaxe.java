@@ -43,14 +43,18 @@ public enum Pickaxe {
     }
 
     public static boolean playerHasUsable() {
+        return getCurrent() != null;
+    }
+
+    public static Pickaxe getCurrent() {
         for(int i = Pickaxe.values().length - 1; i >= 0; i--) {
             if((DynaMiner.getApi().getInventory().contains(Pickaxe.values()[i].name)
-            || DynaMiner.getApi().getEquipment().contains(Pickaxe.values()[i].name))
-            && DynaMiner.getApi().getSkills().getVirtualLevel(Skill.MINING) >= Pickaxe.values()[i].miningLevel) {
-                return true;
+             || DynaMiner.getApi().getEquipment().contains(Pickaxe.values()[i].name))
+             && DynaMiner.getApi().getSkills().getVirtualLevel(Skill.MINING) >= Pickaxe.values()[i].miningLevel) {
+                return Pickaxe.values()[i];
             }
         }
-        return false;
+        return null;
     }
 
     public static Pickaxe getBestUsableBanked() {
