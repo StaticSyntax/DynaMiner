@@ -25,7 +25,7 @@ public class MineRocks extends Task {
             if(rockObject != null) {
                 if(api.getMap().canReach(rockObject)) {
                     rockObject.interact("Mine");
-                    Sleep.waitCondition(() -> api.myPlayer().isAnimating(), 10000, 30000);
+                    Sleep.waitCondition(() -> api.myPlayer().isAnimating(), MethodProvider.random(10000, 30000));
                     break;
                 }
             }
