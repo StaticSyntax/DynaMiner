@@ -38,6 +38,7 @@ public enum Location {
     FOSSIL_ISLAND_LAND(new Area(3739, 3806, 3742, 3802)),
     FOSSIL_ISLAND_VOLCANO(new Area(3816, 3811, 3820, 3806)),
     FOSSIL_ISLAND_SEA(new Area(3768, 3900, 3771, 3896)),
+    MINING_GUILD(new Area(3011, 9720, 3013, 9716)),
     JATISZO(new Area(2415, 3803, 2418, 3801)),
     NEITIZNOT(new Area(2335, 3808, 2337, 3805)),
     NARDAH(new Area(3424, 2892, 3430, 2889)),
