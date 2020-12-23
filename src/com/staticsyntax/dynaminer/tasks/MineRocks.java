@@ -15,7 +15,7 @@ public class MineRocks extends Task {
 
     @Override
     public boolean canProcess() {
-        return Pickaxe.playerHasUsable() && Location.MINING.getArea().contains(api.myPlayer()) && !api.getInventory().isFull();
+        return Pickaxe.playerHasUsable() && Location.MINING.getArea().contains(api.myPlayer()) && !api.getInventory().isFull() && !api.myPlayer().isAnimating();
     }
 
     @Override
@@ -25,7 +25,12 @@ public class MineRocks extends Task {
             if(rockObject != null) {
                 if(api.getMap().canReach(rockObject)) {
                     rockObject.interact("Mine");
-                    Sleep.waitCondition(() -> api.myPlayer().isAnimating(), MethodProvider.random(10000, 30000));
+                    try {
+                        MethodProvider.sleep(MethodProvider.random(750, 1150));
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    Sleep.waitCondition(() -> !api.myPlayer().isAnimating() && !api.myPlayer().isMoving(), MethodProvider.random(10000, 30000));
                     break;
                 }
             }
