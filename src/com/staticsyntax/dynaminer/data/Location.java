@@ -29,11 +29,7 @@ public enum Location {
         return areas;
     }
 
-    public Area getMiningArea() {
-        return Location.MINING.getArea();
-    }
-
-    public void setMiningArea() {
+    public static void setMiningArea() {
 
     }
 

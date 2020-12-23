@@ -1,6 +1,7 @@
 package com.staticsyntax.dynaminer.ui;
 
 import com.staticsyntax.dynaminer.DynaMiner;
+import com.staticsyntax.dynaminer.data.Location;
 import com.staticsyntax.dynaminer.data.Rock;
 
 import javax.swing.*;
@@ -11,12 +12,13 @@ import java.awt.*;
 
 public class Settings implements ChangeListener {
 
+    private static boolean powerMining = false;
+
     private final JDialog mainDialog;
     private final Dimension fillerDimension = new Dimension(0, 25);
     private final Font monoFont_14 = new Font("Monospaced", Font.BOLD, 14);
-    private JPanel miningLocationPanel;
-    private JSlider radiusSlider;
-    private JLabel radiusValueLabel;
+    private final JLabel radiusValueLabel;
+    private final JSlider radiusSlider;
 
     public Settings() {
         mainDialog = new JDialog();
@@ -29,7 +31,7 @@ public class Settings implements ChangeListener {
         mainPanel.setBorder(new EmptyBorder(50, 50, 50, 50));
         mainDialog.getContentPane().add(mainPanel);
 
-        miningLocationPanel = new JPanel();
+        JPanel miningLocationPanel = new JPanel();
         miningLocationPanel.setLayout(new BoxLayout(miningLocationPanel, BoxLayout.PAGE_AXIS));
         JLabel miningLocationLabel = new JLabel("Stand in the center of your target mining location and click set once you have selected the desired radius around your player.");
         miningLocationLabel.setFont(monoFont_14);
@@ -47,6 +49,10 @@ public class Settings implements ChangeListener {
         radiusSlider.addChangeListener(this);
         radiusPanel.add(radiusSlider);
         JButton radiusButton = new JButton("Set");
+        radiusButton.setBackground(Color.CYAN);
+        radiusButton.addActionListener(e -> {
+            Location.setMiningArea();
+        });
         radiusPanel.add(radiusButton);
         miningLocationPanel.add(radiusPanel);
 
@@ -73,6 +79,8 @@ public class Settings implements ChangeListener {
             rockPanel.add(rockLabel);
             rockLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
             JCheckBox rockCheckBox = new JCheckBox();
+            int finalI = i;
+            rockCheckBox.addActionListener(e -> Rock.values()[finalI].setTarget(rockCheckBox.isSelected()));
             rockPanel.add(rockCheckBox);
             rockCheckBox.setAlignmentX(Component.CENTER_ALIGNMENT);
             rockSelectionPanel.add(rockPanel);
@@ -86,6 +94,7 @@ public class Settings implements ChangeListener {
         JLabel powerMineLabel = new JLabel("Drop Ores:");
         powerMinePanel.add(powerMineLabel);
         JCheckBox powerMineCheckBox = new JCheckBox();
+        powerMineCheckBox.addActionListener(e -> powerMining = powerMineCheckBox.isSelected());
         powerMinePanel.add(powerMineCheckBox);
         mainPanel.add(powerMinePanel);
 
@@ -116,5 +125,13 @@ public class Settings implements ChangeListener {
     @Override
     public void stateChanged(ChangeEvent e) {
         radiusValueLabel.setText(String.valueOf(radiusSlider.getValue()));
+    }
+
+    public boolean isPowerMining() {
+        return powerMining;
+    }
+
+    public int getMiningRadius() {
+        return radiusSlider.getValue();
     }
 }

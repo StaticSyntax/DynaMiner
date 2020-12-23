@@ -58,6 +58,7 @@ public enum Rock {
     private int[] ids;
     private String[] oreNames;
     private int miningLevel;
+    private boolean target = false;
 
     Rock(int[] ids, String[] oreNames, int miningLevel) {
         this.ids = ids;
@@ -93,5 +94,13 @@ public enum Rock {
 
     public int getMiningLevel() {
         return miningLevel;
+    }
+
+    public boolean isTarget() {
+        return target;
+    }
+
+    public void setTarget(boolean target) {
+        this.target = target;
     }
 }
