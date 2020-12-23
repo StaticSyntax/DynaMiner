@@ -12,7 +12,7 @@ import java.awt.*;
 
 public class Settings implements ChangeListener {
 
-    private static boolean powerMining = false;
+    private boolean powerMining = false;
 
     private final JDialog mainDialog;
     private final Dimension fillerDimension = new Dimension(0, 25);
