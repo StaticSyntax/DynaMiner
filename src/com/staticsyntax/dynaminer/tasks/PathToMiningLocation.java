@@ -20,9 +20,10 @@ public class PathToMiningLocation extends Task {
 
     @Override
     public void process() {
-        WebWalkEvent webWalkEvent = new WebWalkEvent(Location.MINING.getArea().getCentralPosition());
+        WebWalkEvent webWalkEvent = new WebWalkEvent(Location.MINING.getArea().getRandomPosition());
         webWalkEvent.setPathPreferenceProfile(Utils.getStandardPathPreferenceProfile());
         webWalkEvent.setEnergyThreshold(MethodProvider.random(1, 10));
         DynaMiner.getApi().execute(webWalkEvent);
+        if(DynaMiner.getMiningSettings().getRadius() == 1) api.getWalking().walk(Location.MINING.getArea().getCentralPosition());
     }
 }
