@@ -1,6 +1,7 @@
 package com.staticsyntax.dynaminer.tasks;
 
 import com.staticsyntax.dynaminer.data.Pickaxe;
+import com.staticsyntax.dynaminer.utils.Sleep;
 import org.osbot.rs07.script.MethodProvider;
 
 public class WieldPickaxe extends Task {
@@ -19,6 +20,7 @@ public class WieldPickaxe extends Task {
 
     @Override
     public void process() {
-        api.getInventory().interact("Wield", Pickaxe.getCurrent().getName());
+        Sleep.waitCondition(() -> api.getInventory().interact("Wield", Pickaxe.getCurrent().getName()), 2500);
+        if(api.getBank().isOpen()) api.getBank().depositAll();
     }
 }
