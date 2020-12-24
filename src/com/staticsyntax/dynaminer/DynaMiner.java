@@ -34,7 +34,10 @@ public class DynaMiner extends Script {
     @Override
     public int onLoop() {
         if(running) {
-            tasks.forEach(task -> task.run());
+            for(Task task : tasks) {
+                if(task.canProcess()) log("Current Task: " + task.getClass().getSimpleName());
+                task.run();
+            }
         }
         return random(750, 1550);
     }
