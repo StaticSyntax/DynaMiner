@@ -18,6 +18,6 @@ public class BankJunk extends Task {
 
     @Override
     public void process() {
-        api.getBank().depositAllExcept(Utils.concat(Pickaxe.getNames(), Rock.getAllOreNames()));
+        api.getBank().depositAllExcept(Pickaxe.getNames());
     }
 }
