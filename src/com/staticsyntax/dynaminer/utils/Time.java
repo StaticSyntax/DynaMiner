@@ -7,9 +7,4 @@ public class Time {
         s %= 60; m %= 60; h %= 24;
         return String.format("%02d:%02d:%02d", h, m, s);
     }
-
-    public static final String getFormattedRunningTime() {
-        //return formatTime(System.currentTimeMillis() - getStartTime());
-        return formatTime(System.currentTimeMillis());
-    }
 }

@@ -2,6 +2,7 @@ package com.staticsyntax.dynaminer;
 
 import com.staticsyntax.dynaminer.tasks.*;
 import com.staticsyntax.dynaminer.ui.Settings;
+import com.staticsyntax.dynaminer.ui.Paint;
 import org.osbot.rs07.api.ui.Message;
 import org.osbot.rs07.script.MethodProvider;
 import org.osbot.rs07.script.Script;
@@ -21,12 +22,15 @@ public class DynaMiner extends Script {
 
     private static boolean running = false;
     private static MethodProvider api;
-    private static Settings settings = new Settings();
+    private static Settings settings;
+    private static Paint paint;
     private ArrayList<Task> tasks = new ArrayList<>();
 
     @Override
     public void onStart() {
         api = this;
+        settings = new Settings();
+        paint = new Paint(this);
         initSettings();
         initTasks();
     }
@@ -35,7 +39,7 @@ public class DynaMiner extends Script {
     public int onLoop() {
         if(running) {
             for(Task task : tasks) {
-                if(task.canProcess()) log("Current Task: " + task.getClass().getSimpleName());
+                if(task.canProcess()) paint.setCurrentTask(task.getClass().getSimpleName());
                 task.run();
             }
         }
@@ -44,12 +48,12 @@ public class DynaMiner extends Script {
 
     @Override
     public void onPaint(Graphics2D g) {
-
+        paint.draw(g);
     }
 
     @Override
     public void onMessage(Message m) {
-
+        if(m.getMessage().contains("You manage to mine some")) paint.incrementOresMined();
     }
 
     private void initSettings() {
