@@ -16,7 +16,7 @@ import java.util.ArrayList;
 @ScriptManifest(logo = "",
         name = "DynaMiner",
         info = "",
-        version = 0.1,
+        version = 1.0,
         author = "StaticSyntax")
 public class DynaMiner extends Script {
 
