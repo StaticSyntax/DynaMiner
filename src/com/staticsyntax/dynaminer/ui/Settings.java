@@ -9,14 +9,16 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class Settings implements ChangeListener {
 
-    private boolean powerMining = false;
+    private boolean powerMining, idlingRandomly;
 
     private final JDialog mainDialog;
     private final Dimension fillerDimension = new Dimension(0, 25);
-    private final Font monoFont_14 = new Font("Monospaced", Font.BOLD, 14);
+    private final Font monoFont_12 = new Font("Monospaced", Font.BOLD, 12);
     private final JLabel radiusValueLabel;
     private final JSlider radiusSlider;
 
@@ -31,34 +33,40 @@ public class Settings implements ChangeListener {
         mainPanel.setBorder(new EmptyBorder(50, 50, 50, 50));
         mainDialog.getContentPane().add(mainPanel);
 
-        JPanel miningLocationPanel = new JPanel();
-        miningLocationPanel.setLayout(new BoxLayout(miningLocationPanel, BoxLayout.PAGE_AXIS));
-        JLabel miningLocationLabel = new JLabel("Stand in the center of your target mining location and click set once you have selected the desired radius around your player.");
-        miningLocationLabel.setFont(monoFont_14);
-        miningLocationPanel.add(miningLocationLabel);
-        miningLocationPanel.add(new Box.Filler(fillerDimension, fillerDimension, fillerDimension));
-        miningLocationLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        mainPanel.add(miningLocationPanel);
+        try {
+            JLabel logoLabel = new JLabel(new ImageIcon(new URL("https://i.imgur.com/bc6zxh8.png")));
+            mainPanel.add(logoLabel);
+            logoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        mainPanel.add(new Box.Filler(fillerDimension, fillerDimension, fillerDimension));
+
+        JPanel infoPanel = new JPanel();
+        infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.PAGE_AXIS));
+        JLabel infoLabel = new JLabel("Position your player in the center of your mining location and select the radius of the area you would like to mine in.");
+        infoLabel.setFont(monoFont_12);
+        infoPanel.add(infoLabel);
+        infoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        mainPanel.add(infoPanel);
+
+        mainPanel.add(new Box.Filler(fillerDimension, fillerDimension, fillerDimension));
 
         JPanel radiusPanel = new JPanel();
-        radiusPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        radiusPanel.setLayout(new BoxLayout(radiusPanel, BoxLayout.PAGE_AXIS));
         JLabel radiusLabel = new JLabel("Radius:");
         radiusPanel.add(radiusLabel);
-        radiusSlider = new JSlider(JSlider.HORIZONTAL, 1, 25, 5);
+        radiusLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        radiusSlider = new JSlider(1, 25, 5);
         radiusSlider.setBackground(Color.CYAN);
         radiusSlider.addChangeListener(this);
         radiusPanel.add(radiusSlider);
-        JButton radiusButton = new JButton("Set");
-        radiusButton.setBackground(Color.CYAN);
-        radiusButton.addActionListener(e -> {
-            Location.setMiningArea();
-        });
-        radiusPanel.add(radiusButton);
-        miningLocationPanel.add(radiusPanel);
-
+        radiusSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
         radiusValueLabel = new JLabel(String.valueOf(radiusSlider.getValue()));
-        miningLocationPanel.add(radiusValueLabel);
+        radiusPanel.add(radiusValueLabel);
         radiusValueLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        mainPanel.add(radiusPanel);
 
         mainPanel.add(new Box.Filler(fillerDimension, fillerDimension, fillerDimension));
 
@@ -71,7 +79,7 @@ public class Settings implements ChangeListener {
         mainPanel.add(targetRocksPanel);
 
         JPanel rockSelectionPanel = new JPanel();
-        rockSelectionPanel.setLayout(new GridLayout(2, 6, 0, 5));
+        rockSelectionPanel.setLayout(new GridLayout(4, 4, 0, 5));
         for(int i = 0; i < Rock.values().length; i++) {
             JPanel rockPanel = new JPanel();
             rockPanel.setLayout(new BoxLayout(rockPanel, BoxLayout.PAGE_AXIS));
@@ -79,6 +87,8 @@ public class Settings implements ChangeListener {
             rockPanel.add(rockLabel);
             rockLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
             JCheckBox rockCheckBox = new JCheckBox();
+            rockCheckBox.setBackground(Color.CYAN);
+            rockCheckBox.setForeground(Color.BLACK);
             int finalI = i;
             rockCheckBox.addActionListener(e -> Rock.values()[finalI].setTarget(rockCheckBox.isSelected()));
             rockPanel.add(rockCheckBox);
@@ -89,20 +99,42 @@ public class Settings implements ChangeListener {
 
         mainPanel.add(new Box.Filler(fillerDimension, fillerDimension, fillerDimension));
 
+        JPanel optionsPanel = new JPanel();
+        optionsPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         JPanel powerMinePanel = new JPanel();
-        powerMinePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        JLabel powerMineLabel = new JLabel("Drop Ores:");
+        powerMinePanel.setLayout(new BoxLayout(powerMinePanel, BoxLayout.PAGE_AXIS));
+        powerMinePanel.setBorder(new EmptyBorder(5, 15, 5, 15));
+        JLabel powerMineLabel = new JLabel("Power Mining");
         powerMinePanel.add(powerMineLabel);
+        powerMineLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         JCheckBox powerMineCheckBox = new JCheckBox();
+        powerMineCheckBox.setBackground(Color.CYAN);
+        powerMineCheckBox.setForeground(Color.BLACK);
         powerMineCheckBox.addActionListener(e -> powerMining = powerMineCheckBox.isSelected());
         powerMinePanel.add(powerMineCheckBox);
-        mainPanel.add(powerMinePanel);
+        powerMineCheckBox.setAlignmentX(Component.CENTER_ALIGNMENT);
+        optionsPanel.add(powerMinePanel);
+        JPanel idlePanel = new JPanel();
+        idlePanel.setLayout(new BoxLayout(idlePanel, BoxLayout.PAGE_AXIS));
+        idlePanel.setBorder(new EmptyBorder(5, 15, 5, 15));
+        JLabel idleLabel = new JLabel("Randomly Idle");
+        idlePanel.add(idleLabel);
+        idleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JCheckBox idleCheckBox = new JCheckBox();
+        idleCheckBox.setBackground(Color.CYAN);
+        idleCheckBox.setForeground(Color.BLACK);
+        idleCheckBox.addActionListener(e -> idlingRandomly = idleCheckBox.isSelected());
+        idlePanel.add(idleCheckBox);
+        idleCheckBox.setAlignmentX(Component.CENTER_ALIGNMENT);
+        optionsPanel.add(idlePanel);
+        mainPanel.add(optionsPanel);
 
         mainPanel.add(new Box.Filler(fillerDimension, fillerDimension, fillerDimension));
 
         JButton startButton = new JButton("Start");
         startButton.setBackground(Color.CYAN);
         startButton.addActionListener(e -> {
+            Location.setMiningArea();
             DynaMiner.setRunning(true);
             close();
         });
@@ -129,6 +161,10 @@ public class Settings implements ChangeListener {
 
     public boolean isPowerMining() {
         return powerMining;
+    }
+
+    public boolean isIdlingRandomly() {
+        return idlingRandomly;
     }
 
     public int getRadius() {
