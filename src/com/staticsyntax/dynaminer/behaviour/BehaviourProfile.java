@@ -19,7 +19,7 @@ public class BehaviourProfile {
 
     public void generateNewProfile() {
         for(int i = 0; i < sleepTime.length; i++) {
-            sleepTime[i] = MethodProvider.random(750, 1500);
+            sleepTime[i] = MethodProvider.random(750, 1250);
         }
         Arrays.sort(sleepTime);
         randomiseAmountPerSwitch();

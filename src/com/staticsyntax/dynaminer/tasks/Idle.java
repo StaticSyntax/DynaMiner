@@ -12,12 +12,12 @@ public class Idle extends Task {
 
     @Override
     public boolean canProcess() {
-        return DynaMiner.getMiningSettings().isIdlingRandomly() && MethodProvider.random(100) <= MethodProvider.random(0, 2);
+        return DynaMiner.getMiningSettings().isIdlingRandomly() && MethodProvider.random(100) <= 1;
     }
 
     @Override
     public void process() {
         api.getMouse().moveOutsideScreen();
-        Sleep.waitCondition(() -> api.myPlayer().isUnderAttack(), DynaMiner.getBehaviourProfile().getSleepTime() * MethodProvider.random(4, 10));
+        Sleep.waitCondition(() -> api.myPlayer().isUnderAttack(), DynaMiner.getBehaviourProfile().getSleepTime() * MethodProvider.random(6, 12));
     }
 }
