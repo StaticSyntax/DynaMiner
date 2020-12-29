@@ -24,6 +24,5 @@ public class PathToMiningLocation extends Task {
         webWalkEvent.setPathPreferenceProfile(Utils.getStandardPathPreferenceProfile());
         webWalkEvent.setEnergyThreshold(MethodProvider.random(1, 10));
         DynaMiner.getApi().execute(webWalkEvent);
-        if(DynaMiner.getMiningSettings().getRadius() == 1) api.getWalking().walk(Location.MINING.getArea().getCentralPosition());
     }
 }
