@@ -95,7 +95,7 @@ public class DynaMiner extends Script {
     }
 
     public static void initBehaviourProfile() {
-        behaviourProfile = new BehaviourProfile(true);
+        behaviourProfile = new BehaviourProfile();
     }
 
     public static BehaviourProfile getBehaviourProfile() {

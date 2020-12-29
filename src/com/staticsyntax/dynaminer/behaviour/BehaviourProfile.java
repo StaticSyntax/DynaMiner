@@ -8,16 +8,16 @@ import java.util.Arrays;
 
 public class BehaviourProfile {
 
-    private int fatigue = 0;
+    private int fatigue;
     private int[] sleepTime = new int[2];
     private int amountPerSwitch, currentAmount, currentTarget;
 
-    public BehaviourProfile(boolean resetFatigue) {
-        generateNewProfile(resetFatigue);
+    public BehaviourProfile() {
+        fatigue = 0;
+        generateNewProfile();
     }
 
-    public void generateNewProfile(boolean resetFatigue) {
-        if(resetFatigue) fatigue = 0;
+    public void generateNewProfile() {
         for(int i = 0; i < sleepTime.length; i++) {
             sleepTime[i] = MethodProvider.random(750, 2250);
         }
