@@ -52,6 +52,8 @@ public class Paint {
 
     private void drawMiningArea(Graphics2D g) {
         List<Position> positions = Location.MINING.getArea().getPositions();
+        g.setColor(new Color(1f, 1f, 1f, 0.1f));
+        g.setStroke(new BasicStroke(1.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 10.0f, new float[] {10.0f}, 0.0f));
         for(Position pos : positions) {
             Polygon poly = pos.getPolygon(DynaMiner.getApi().getBot());
             g.drawPolygon(poly);
