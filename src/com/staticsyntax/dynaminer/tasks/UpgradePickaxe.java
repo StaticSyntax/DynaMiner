@@ -11,7 +11,7 @@ public class UpgradePickaxe extends Task {
 
     @Override
     public boolean canProcess() {
-        if(Pickaxe.playerHasUsable() && api.getBank().isOpen()) {
+        if(Pickaxe.playerHasUsable() && api.getBank().isOpen() && !api.getInventory().isFull()) {
             if(Pickaxe.getBestUsableBanked() != null) {
                 return Pickaxe.getCurrent().ordinal() < Pickaxe.getBestUsableBanked().ordinal();
             }
