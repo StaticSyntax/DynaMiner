@@ -19,7 +19,7 @@ public class BehaviourProfile {
 
     public void generateNewProfile() {
         for(int i = 0; i < sleepTime.length; i++) {
-            sleepTime[i] = MethodProvider.random(750, 2250);
+            sleepTime[i] = MethodProvider.random(750, 1500);
         }
         Arrays.sort(sleepTime);
         randomiseAmountPerSwitch();
@@ -28,20 +28,15 @@ public class BehaviourProfile {
     }
 
     public void increaseFatigue() {
-        fatigue += MethodProvider.random(1, 5);
+        fatigue += MethodProvider.random(1, 10);
     }
 
-    public int[] getSleepTime() {
-        int[] sleepTimes = new int[] {sleepTime[0] + fatigue, sleepTime[1] + fatigue};
-        return sleepTimes;
+    public int getSleepTime() {
+        return MethodProvider.random(sleepTime[0] + fatigue, sleepTime[1] + fatigue);
     }
 
     private void randomiseAmountPerSwitch() {
         amountPerSwitch = MethodProvider.random(DynaMiner.getApi().getInventory().getEmptySlots() / Rock.getTargets().length);
-    }
-
-    public int getAmountPerSwitch() {
-        return amountPerSwitch;
     }
 
     public void incrementCurrentAmount() {

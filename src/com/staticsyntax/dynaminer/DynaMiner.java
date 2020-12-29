@@ -44,7 +44,7 @@ public class DynaMiner extends Script {
                 task.run();
             }
         }
-        return random(behaviourProfile.getSleepTime()[0], behaviourProfile.getSleepTime()[1]);
+        return behaviourProfile.getSleepTime();
     }
 
     @Override
