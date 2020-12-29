@@ -1,4 +1,4 @@
-package com.staticsyntax.dynaminer.rng;
+package com.staticsyntax.dynaminer.behaviour;
 
 import com.staticsyntax.dynaminer.DynaMiner;
 import com.staticsyntax.dynaminer.data.Rock;
@@ -6,13 +6,13 @@ import org.osbot.rs07.script.MethodProvider;
 
 import java.util.Arrays;
 
-public class RNGProfile {
+public class BehaviourProfile {
 
     private int fatigue = 0;
     private int[] sleepTime = new int[2];
     private int amountPerSwitch, currentAmount, currentTarget;
 
-    public RNGProfile(boolean resetFatigue) {
+    public BehaviourProfile(boolean resetFatigue) {
         generateNewProfile(resetFatigue);
     }
 

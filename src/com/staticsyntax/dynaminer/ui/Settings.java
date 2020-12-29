@@ -135,7 +135,7 @@ public class Settings implements ChangeListener {
         startButton.setBackground(Color.CYAN);
         startButton.addActionListener(e -> {
             Location.setMiningArea();
-            DynaMiner.initRngProfile();
+            DynaMiner.initBehaviourProfile();
             DynaMiner.setRunning(true);
             close();
         });

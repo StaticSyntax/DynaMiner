@@ -21,7 +21,7 @@ public class MineRocks extends Task {
 
     @Override
     public void process() {
-        RS2Object rockObject = api.getObjects().closest(Location.MINING.getArea(), Rock.getTargets()[DynaMiner.getRngProfile().getCurrentTarget()].getIds());
+        RS2Object rockObject = api.getObjects().closest(Location.MINING.getArea(), Rock.getTargets()[DynaMiner.getBehaviourProfile().getCurrentTarget()].getIds());
         mineRock(rockObject);
         if(!api.getSettings().isRunning() && api.getSettings().getRunEnergy() >= MethodProvider.random(1, 10)) {
             api.getSettings().setRunning(true);
@@ -34,7 +34,7 @@ public class MineRocks extends Task {
                 rockObject.interact("Mine");
                 Sleep.waitCondition(() -> api.myPlayer().isAnimating(), MethodProvider.random(2500, 5000));
                 Sleep.waitCondition(() -> !api.myPlayer().isAnimating(), MethodProvider.random(10000, 60000));
-                DynaMiner.getRngProfile().increaseFatigue();
+                DynaMiner.getBehaviourProfile().increaseFatigue();
             }
         }
     }

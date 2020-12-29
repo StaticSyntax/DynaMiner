@@ -17,7 +17,7 @@ public class Idle extends Task {
     @Override
     public void process() {
         try {
-            api.sleep(DynaMiner.getRngProfile().getSleepTime()[1] * MethodProvider.random(4, 10));
+            api.sleep(DynaMiner.getBehaviourProfile().getSleepTime()[1] * MethodProvider.random(4, 10));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

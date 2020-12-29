@@ -1,6 +1,6 @@
 package com.staticsyntax.dynaminer;
 
-import com.staticsyntax.dynaminer.rng.RNGProfile;
+import com.staticsyntax.dynaminer.behaviour.BehaviourProfile;
 import com.staticsyntax.dynaminer.tasks.*;
 import com.staticsyntax.dynaminer.ui.Settings;
 import com.staticsyntax.dynaminer.ui.Paint;
@@ -23,7 +23,7 @@ public class DynaMiner extends Script {
 
     private static boolean running = false;
     private static MethodProvider api;
-    private static RNGProfile rngProfile;
+    private static BehaviourProfile behaviourProfile;
     private static Settings settings;
     private static Paint paint;
     private ArrayList<Task> tasks = new ArrayList<>();
@@ -44,7 +44,7 @@ public class DynaMiner extends Script {
                 task.run();
             }
         }
-        return random(rngProfile.getSleepTime()[0], rngProfile.getSleepTime()[1]);
+        return random(behaviourProfile.getSleepTime()[0], behaviourProfile.getSleepTime()[1]);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class DynaMiner extends Script {
     @Override
     public void onMessage(Message m) {
         if(m.getMessage().contains("You manage to mine some")) {
-            rngProfile.incrementCurrentAmount();
+            behaviourProfile.incrementCurrentAmount();
             paint.incrementOresMined();
         }
     }
@@ -94,12 +94,12 @@ public class DynaMiner extends Script {
         return api;
     }
 
-    public static void initRngProfile() {
-        rngProfile = new RNGProfile(true);
+    public static void initBehaviourProfile() {
+        behaviourProfile = new BehaviourProfile(true);
     }
 
-    public static RNGProfile getRngProfile() {
-        return rngProfile;
+    public static BehaviourProfile getBehaviourProfile() {
+        return behaviourProfile;
     }
 
     public static Settings getMiningSettings() {
