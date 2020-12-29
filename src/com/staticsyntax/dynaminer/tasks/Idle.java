@@ -12,7 +12,7 @@ public class Idle extends Task {
 
     @Override
     public boolean canProcess() {
-        return DynaMiner.getMiningSettings().isIdlingRandomly() && MethodProvider.random(100) <= MethodProvider.random(0, 4);
+        return DynaMiner.getMiningSettings().isIdlingRandomly() && MethodProvider.random(100) <= MethodProvider.random(0, 2);
     }
 
     @Override
