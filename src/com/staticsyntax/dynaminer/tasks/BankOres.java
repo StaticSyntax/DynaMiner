@@ -22,7 +22,6 @@ public class BankOres extends Task {
     @Override
     public void process() {
         WebWalkEvent webWalkEvent = new WebWalkEvent(Location.getBanks(api.getWorlds().isMembersWorld()));
-        webWalkEvent.setPathPreferenceProfile(Utils.getStandardPathPreferenceProfile());
         webWalkEvent.setEnergyThreshold(MethodProvider.random(1, 10));
         DynaMiner.getApi().execute(webWalkEvent);
         if(api.getBank().isOpen()) {
