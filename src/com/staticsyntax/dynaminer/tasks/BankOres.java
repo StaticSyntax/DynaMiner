@@ -4,6 +4,7 @@ import com.staticsyntax.dynaminer.DynaMiner;
 import com.staticsyntax.dynaminer.data.Location;
 import com.staticsyntax.dynaminer.data.Pickaxe;
 import com.staticsyntax.dynaminer.data.Rock;
+import com.staticsyntax.dynaminer.utils.Utils;
 import org.osbot.rs07.event.WebWalkEvent;
 import org.osbot.rs07.script.MethodProvider;
 
@@ -20,7 +21,8 @@ public class BankOres extends Task {
 
     @Override
     public void process() {
-        WebWalkEvent webWalkEvent = new WebWalkEvent(Location.getBanks(api.getWorlds().isMembersWorld()));
+        WebWalkEvent webWalkEvent = new WebWalkEvent(Location.getBanks());
+        webWalkEvent.setPathPreferenceProfile(Utils.getStandardPathPreferenceProfile());
         webWalkEvent.setEnergyThreshold(MethodProvider.random(1, 10));
         DynaMiner.getApi().execute(webWalkEvent);
         if(api.getBank().isOpen()) {

@@ -16,7 +16,8 @@ public class GetPickaxe extends Task {
     public GetPickaxe(MethodProvider api, Script script) {
         super(api);
         this.script = script;
-        webWalkEvent = new WebWalkEvent(Location.getBanks(api.getWorlds().isMembersWorld()));
+        webWalkEvent = new WebWalkEvent(Location.getBanks());
+        webWalkEvent.setPathPreferenceProfile(Utils.getStandardPathPreferenceProfile());
     }
 
     @Override

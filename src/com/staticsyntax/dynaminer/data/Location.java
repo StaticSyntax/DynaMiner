@@ -60,7 +60,8 @@ public enum Location {
     private Area area;
     private boolean membersOnly;
 
-    public static Area[] getBanks(boolean includeMembersBanks) {
+    public static Area[] getBanks() {
+        boolean includeMembersBanks = DynaMiner.getApi().getWorlds().isMembersWorld();
         ArrayList<Area> bankAreas = new ArrayList<>();
         for(int i = 1; i < Location.values().length; i++) {
             if(includeMembersBanks) {
