@@ -20,7 +20,7 @@ public class Paint {
     private long startTime;
     private String currentTask;
     private int oresMined;
-    private BufferedImage logo, cursor;
+    private BufferedImage logo;
     private Font monospaced_16;
 
     public Paint(MethodProvider api) {
@@ -33,11 +33,6 @@ public class Paint {
     private void loadResources() {
         try {
             logo = ImageIO.read(new URL("https://i.imgur.com/bc6zxh8.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            cursor = ImageIO.read(new URL("https://i.imgur.com/no0bPZ9.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -76,9 +71,12 @@ public class Paint {
     }
 
     private void drawCursor(Graphics2D g) {
-        int width = cursor.getWidth() / 6;
-        int height = cursor.getHeight() / 6;
-        g.drawImage(cursor, api.getMouse().getPosition().x - width / 2, api.getMouse().getPosition().y - height / 2, width, height, null);
+        Point mousePoint = api.getMouse().getPosition();
+        g.setStroke(new BasicStroke());
+        g.setColor(Color.PINK);
+        g.drawLine(mousePoint.x - 5, mousePoint.y + 5, mousePoint.x + 5, mousePoint.y - 5);
+        g.setColor(Color.CYAN);
+        g.drawLine(mousePoint.x + 5, mousePoint.y + 5, mousePoint.x - 5, mousePoint.y - 5);
     }
 
     public void setCurrentTask(String currentTask) {
