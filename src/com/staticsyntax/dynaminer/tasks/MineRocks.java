@@ -1,5 +1,6 @@
 package com.staticsyntax.dynaminer.tasks;
 
+import com.staticsyntax.dynaminer.DynaMiner;
 import com.staticsyntax.dynaminer.data.Location;
 import com.staticsyntax.dynaminer.data.Pickaxe;
 import com.staticsyntax.dynaminer.data.Rock;
@@ -21,9 +22,12 @@ public class MineRocks extends Task {
     @Override
     public void process() {
         for(Rock rock : Rock.getTargets()) {
-            RS2Object rockObject = api.getObjects().closest(Location.MINING.getArea(), rock.getIds());
-            mineRock(rockObject);
-            break;
+            for(int i = 0; i < DynaMiner.getRngProfile().getMiningAmount(); i++) {
+                RS2Object rockObject = api.getObjects().closest(Location.MINING.getArea(), rock.getIds());
+                mineRock(rockObject);
+                if(api.getInventory().isFull()) break;
+            }
+            if(api.getInventory().isFull()) break;
         }
     }
 
@@ -31,8 +35,14 @@ public class MineRocks extends Task {
         if(rockObject != null) {
             if(api.getMap().canReach(rockObject)) {
                 rockObject.interact("Mine");
-                Sleep.waitCondition(() -> api.myPlayer().isAnimating(), MethodProvider.random(2500, 5000));
-                Sleep.waitCondition(() -> !api.myPlayer().isAnimating(), MethodProvider.random(15000, 30000));
+                Sleep.waitCondition(() -> api.myPlayer().isAnimating(), 5000);
+                Sleep.waitCondition(() -> !api.myPlayer().isAnimating(), 60000);
+                try {
+                    DynaMiner.getRngProfile().increaseFatigue();
+                    api.sleep(MethodProvider.random(DynaMiner.getRngProfile().getSleepTime()[0], DynaMiner.getRngProfile().getSleepTime()[1]));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

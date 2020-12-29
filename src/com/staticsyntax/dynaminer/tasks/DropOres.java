@@ -19,5 +19,6 @@ public class DropOres extends Task {
     @Override
     public void process() {
         api.getInventory().dropAll(Rock.getAllOreNames());
+        DynaMiner.getRngProfile().generateNewProfile(false);
     }
 }

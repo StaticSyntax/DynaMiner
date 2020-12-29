@@ -27,6 +27,7 @@ public class BankOres extends Task {
         DynaMiner.getApi().execute(webWalkEvent);
         if(api.getBank().isOpen()) {
             api.getBank().depositAll(Rock.getAllOreNames());
+            DynaMiner.getRngProfile().generateNewProfile(false);
         } else {
             try {
                 api.getBank().open();
