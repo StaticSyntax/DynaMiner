@@ -1,6 +1,6 @@
 package com.staticsyntax.dynaminer.ui;
 
-import com.staticsyntax.dynaminer.utils.Time;
+import com.staticsyntax.dynaminer.utils.Sleep;
 import org.osbot.rs07.api.ui.Skill;
 import org.osbot.rs07.script.MethodProvider;
 
@@ -49,7 +49,7 @@ public class Paint {
     private void drawStrings(Graphics2D g) {
         g.setFont(monospaced_16);
         g.setColor(Color.WHITE);
-        g.drawString("Running Time: " + Time.formatTime(System.currentTimeMillis() - startTime), 10, 110);
+        g.drawString("Running Time: " + Sleep.msToString(System.currentTimeMillis() - startTime), 10, 110);
         g.drawString("Current Task: " + currentTask, 10, 130);
         g.drawString("Ores Mined: " + oresMined, 10, 150);
         g.drawString("Mining Level: " + api.getSkills().getVirtualLevel(Skill.MINING) + " (+" + api.getExperienceTracker().getGainedLevels(Skill.MINING) + ")", 10, 170);
