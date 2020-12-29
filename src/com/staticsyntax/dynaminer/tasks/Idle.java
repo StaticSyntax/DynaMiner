@@ -16,6 +16,7 @@ public class Idle extends Task {
 
     @Override
     public void process() {
+        api.getMouse().moveOutsideScreen();
         try {
             api.sleep(DynaMiner.getBehaviourProfile().getSleepTime()[1] * MethodProvider.random(4, 10));
         } catch (InterruptedException e) {
