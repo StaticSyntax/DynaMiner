@@ -9,6 +9,8 @@ import org.osbot.rs07.script.MethodProvider;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
