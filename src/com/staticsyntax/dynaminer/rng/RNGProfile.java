@@ -1,5 +1,6 @@
 package com.staticsyntax.dynaminer.rng;
 
+import com.staticsyntax.dynaminer.DynaMiner;
 import com.staticsyntax.dynaminer.data.Rock;
 import org.osbot.rs07.script.MethodProvider;
 
@@ -9,7 +10,7 @@ public class RNGProfile {
 
     private int fatigue = 0;
     private int[] sleepTime = new int[2];
-    private int miningAmount;
+    private int amountPerSwitch, currentAmount, currentTarget;
 
     public RNGProfile(boolean resetFatigue) {
         generateNewProfile(resetFatigue);
@@ -21,7 +22,9 @@ public class RNGProfile {
             sleepTime[i] = MethodProvider.random(750, 2250);
         }
         Arrays.sort(sleepTime);
-        miningAmount = MethodProvider.random(28 / Rock.getTargets().length);
+        randomiseAmountPerSwitch();
+        currentAmount = 0;
+        currentTarget = 0;
     }
 
     public void increaseFatigue() {
@@ -33,7 +36,27 @@ public class RNGProfile {
         return sleepTimes;
     }
 
-    public int getMiningAmount() {
-        return miningAmount;
+    private void randomiseAmountPerSwitch() {
+        amountPerSwitch = MethodProvider.random(DynaMiner.getApi().getInventory().getEmptySlots() / Rock.getTargets().length);
+    }
+
+    public int getAmountPerSwitch() {
+        return amountPerSwitch;
+    }
+
+    public void incrementCurrentAmount() {
+        currentAmount++;
+        if(currentAmount >= amountPerSwitch) {
+            currentAmount = 0;
+            currentTarget++;
+            if(currentTarget >= Rock.getTargets().length) {
+                currentTarget = 0;
+                randomiseAmountPerSwitch();
+            }
+        }
+    }
+
+    public int getCurrentTarget() {
+        return currentTarget;
     }
 }

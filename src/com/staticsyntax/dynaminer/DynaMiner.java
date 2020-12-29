@@ -54,7 +54,10 @@ public class DynaMiner extends Script {
 
     @Override
     public void onMessage(Message m) {
-        if(m.getMessage().contains("You manage to mine some")) paint.incrementOresMined();
+        if(m.getMessage().contains("You manage to mine some")) {
+            rngProfile.incrementCurrentAmount();
+            paint.incrementOresMined();
+        }
     }
 
     private void initSettings() {
