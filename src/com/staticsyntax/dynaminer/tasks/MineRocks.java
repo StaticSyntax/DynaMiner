@@ -8,6 +8,7 @@ import com.staticsyntax.dynaminer.utils.Sleep;
 import org.osbot.rs07.api.model.RS2Object;
 import org.osbot.rs07.script.MethodProvider;
 
+
 public class MineRocks extends Task {
 
     public MineRocks(MethodProvider api) {
@@ -21,7 +22,7 @@ public class MineRocks extends Task {
 
     @Override
     public void process() {
-        RS2Object rockObject = api.getObjects().closest(Location.MINING.getArea(), Rock.getTargets()[DynaMiner.getBehaviourProfile().getCurrentTarget()].getIds());
+        RS2Object rockObject = api.getObjects().closest(true, Rock.getTargets()[DynaMiner.getBehaviourProfile().getCurrentTarget()].getIds());
         mineRock(rockObject);
         if(!api.getSettings().isRunning() && api.getSettings().getRunEnergy() >= MethodProvider.random(1, 10)) {
             api.getSettings().setRunning(true);
@@ -32,8 +33,7 @@ public class MineRocks extends Task {
         if(rockObject != null) {
             if(api.getMap().canReach(rockObject)) {
                 rockObject.interact("Mine");
-                Sleep.waitCondition(() -> api.myPlayer().isAnimating(), MethodProvider.random(2500, 5000));
-                Sleep.waitCondition(() -> !api.myPlayer().isAnimating(), MethodProvider.random(10000, 60000));
+                Sleep.waitCondition(() -> !rockObject.exists(), MethodProvider.random(10000, 60000));
                 DynaMiner.getBehaviourProfile().increaseFatigue();
             }
         }
