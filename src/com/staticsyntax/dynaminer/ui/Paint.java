@@ -1,6 +1,9 @@
 package com.staticsyntax.dynaminer.ui;
 
+import com.staticsyntax.dynaminer.DynaMiner;
+import com.staticsyntax.dynaminer.data.Location;
 import com.staticsyntax.dynaminer.utils.Sleep;
+import org.osbot.rs07.api.map.Position;
 import org.osbot.rs07.api.ui.Skill;
 import org.osbot.rs07.script.MethodProvider;
 
@@ -9,6 +12,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 
 public class Paint {
 
@@ -41,9 +45,22 @@ public class Paint {
     }
 
     public void draw(Graphics2D g) {
+        drawMiningArea(g);
+        drawInfo(g);
+        drawCursor(g);
+    }
+
+    private void drawMiningArea(Graphics2D g) {
+        List<Position> positions = Location.MINING.getArea().getPositions();
+        for(Position pos : positions) {
+            Polygon poly = pos.getPolygon(DynaMiner.getApi().getBot());
+            g.drawPolygon(poly);
+        }
+    }
+
+    private void drawInfo(Graphics2D g) {
         g.drawImage(logo, 5, 25, logo.getWidth() / 2, logo.getHeight() / 2, null);
         drawStrings(g);
-        drawCursor(g);
     }
 
     private void drawStrings(Graphics2D g) {
