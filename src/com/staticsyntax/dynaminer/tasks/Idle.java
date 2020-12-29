@@ -1,6 +1,7 @@
 package com.staticsyntax.dynaminer.tasks;
 
 import com.staticsyntax.dynaminer.DynaMiner;
+import com.staticsyntax.dynaminer.utils.Sleep;
 import org.osbot.rs07.script.MethodProvider;
 
 public class Idle extends Task {
@@ -17,10 +18,6 @@ public class Idle extends Task {
     @Override
     public void process() {
         api.getMouse().moveOutsideScreen();
-        try {
-            api.sleep(DynaMiner.getBehaviourProfile().getSleepTime() * MethodProvider.random(4, 10));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Sleep.waitCondition(() -> api.myPlayer().isUnderAttack(), DynaMiner.getBehaviourProfile().getSleepTime() * MethodProvider.random(4, 10));
     }
 }
