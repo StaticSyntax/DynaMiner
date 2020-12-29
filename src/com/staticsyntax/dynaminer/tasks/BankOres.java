@@ -25,15 +25,30 @@ public class BankOres extends Task {
         webWalkEvent.setPathPreferenceProfile(Utils.getStandardPathPreferenceProfile());
         webWalkEvent.setEnergyThreshold(MethodProvider.random(1, 10));
         DynaMiner.getApi().execute(webWalkEvent);
-        if(api.getBank().isOpen()) {
-            api.getBank().depositAll(Rock.getAllOreNames());
-            DynaMiner.getBehaviourProfile().generateNewProfile();
-        } else {
-            try {
-                api.getBank().open();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+
+        if(!api.getBank().isOpen() && !api.getDepositBox().isOpen()) {
+            boolean depositBoxFound = false;
+            if(DynaMiner.getMiningSettings().isUsingDepositBoxes()) {
+                depositBoxFound = api.getDepositBox().open();
             }
+            if(!DynaMiner.getMiningSettings().isUsingDepositBoxes() || !depositBoxFound) {
+                openBank();
+            }
+        } else {
+            if(api.getBank().isOpen()) {
+                api.getBank().depositAll(Rock.getAllOreNames());
+            } else if(api.getDepositBox().isOpen()) {
+                api.getDepositBox().depositAll(Rock.getAllOreNames());
+            }
+            DynaMiner.getBehaviourProfile().generateNewProfile();
+        }
+    }
+
+    private void openBank() {
+        try {
+            api.getBank().open();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }

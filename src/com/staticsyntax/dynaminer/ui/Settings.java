@@ -14,7 +14,7 @@ import java.net.URL;
 
 public class Settings implements ChangeListener {
 
-    private boolean powerMining, idlingRandomly;
+    private boolean powerMining, idlingRandomly, usingDepositBoxes;
 
     private final JDialog mainDialog;
     private final Dimension fillerDimension = new Dimension(0, 25);
@@ -101,6 +101,7 @@ public class Settings implements ChangeListener {
 
         JPanel optionsPanel = new JPanel();
         optionsPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+
         JPanel powerMinePanel = new JPanel();
         powerMinePanel.setLayout(new BoxLayout(powerMinePanel, BoxLayout.PAGE_AXIS));
         powerMinePanel.setBorder(new EmptyBorder(5, 15, 5, 15));
@@ -114,6 +115,7 @@ public class Settings implements ChangeListener {
         powerMinePanel.add(powerMineCheckBox);
         powerMineCheckBox.setAlignmentX(Component.CENTER_ALIGNMENT);
         optionsPanel.add(powerMinePanel);
+
         JPanel idlePanel = new JPanel();
         idlePanel.setLayout(new BoxLayout(idlePanel, BoxLayout.PAGE_AXIS));
         idlePanel.setBorder(new EmptyBorder(5, 15, 5, 15));
@@ -127,6 +129,20 @@ public class Settings implements ChangeListener {
         idlePanel.add(idleCheckBox);
         idleCheckBox.setAlignmentX(Component.CENTER_ALIGNMENT);
         optionsPanel.add(idlePanel);
+
+        JPanel depositBoxPanel = new JPanel();
+        depositBoxPanel.setLayout(new BoxLayout(depositBoxPanel, BoxLayout.PAGE_AXIS));
+        depositBoxPanel.setBorder(new EmptyBorder(5, 15, 5, 15));
+        JLabel depositBoxLabel = new JLabel("Use Deposit Boxes");
+        depositBoxPanel.add(depositBoxLabel);
+        depositBoxLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JCheckBox depositBoxCheckBox = new JCheckBox();
+        depositBoxCheckBox.setBackground(Color.CYAN);
+        depositBoxCheckBox.setForeground(Color.BLACK);
+        depositBoxCheckBox.addActionListener(e -> usingDepositBoxes = depositBoxCheckBox.isSelected());
+        depositBoxPanel.add(depositBoxCheckBox);
+        depositBoxCheckBox.setAlignmentX(Component.CENTER_ALIGNMENT);
+        optionsPanel.add(depositBoxPanel);
         mainPanel.add(optionsPanel);
 
         mainPanel.add(new Box.Filler(fillerDimension, fillerDimension, fillerDimension));
@@ -166,6 +182,10 @@ public class Settings implements ChangeListener {
 
     public boolean isIdlingRandomly() {
         return idlingRandomly;
+    }
+
+    public boolean isUsingDepositBoxes() {
+        return usingDepositBoxes;
     }
 
     public int getRadius() {

@@ -13,11 +13,15 @@ public class BankJunk extends Task {
 
     @Override
     public boolean canProcess() {
-        return !api.getInventory().onlyContains(Utils.concat(Pickaxe.getNames(), Rock.getAllOreNames())) && api.getBank().isOpen();
+        return !api.getInventory().onlyContains(Utils.concat(Pickaxe.getNames(), Rock.getAllOreNames())) && (api.getBank().isOpen() || api.getDepositBox().isOpen());
     }
 
     @Override
     public void process() {
-        api.getBank().depositAllExcept(Pickaxe.getNames());
+        if(api.getBank().isOpen()) {
+            api.getBank().depositAllExcept(Pickaxe.getNames());
+        } else if(api.getDepositBox().isOpen()) {
+            api.getDepositBox().depositAllExcept(Pickaxe.getNames());
+        }
     }
 }
