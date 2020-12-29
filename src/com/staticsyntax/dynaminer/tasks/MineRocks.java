@@ -23,7 +23,9 @@ public class MineRocks extends Task {
     public void process() {
         RS2Object rockObject = api.getObjects().closest(Location.MINING.getArea(), Rock.getTargets()[DynaMiner.getRngProfile().getCurrentTarget()].getIds());
         mineRock(rockObject);
-        api.getSettings().setRunning(!api.getSettings().isRunning() && api.getSettings().getRunEnergy() >= MethodProvider.random(1, 10));
+        if(!api.getSettings().isRunning() && api.getSettings().getRunEnergy() >= MethodProvider.random(1, 10)) {
+            api.getSettings().setRunning(true);
+        }
     }
 
     private void mineRock(RS2Object rockObject) {
