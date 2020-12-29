@@ -37,12 +37,25 @@ public class MineRocks extends Task {
                 rockObject.interact("Mine");
                 Sleep.waitCondition(() -> api.myPlayer().isAnimating(), 5000);
                 Sleep.waitCondition(() -> !api.myPlayer().isAnimating(), 60000);
-                try {
-                    DynaMiner.getRngProfile().increaseFatigue();
-                    api.sleep(MethodProvider.random(DynaMiner.getRngProfile().getSleepTime()[0], DynaMiner.getRngProfile().getSleepTime()[1]));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                DynaMiner.getRngProfile().increaseFatigue();
+                sleepOrIdle();
+            }
+        }
+    }
+
+    private void sleepOrIdle() {
+        int sleepTime = MethodProvider.random(DynaMiner.getRngProfile().getSleepTime()[0], DynaMiner.getRngProfile().getSleepTime()[1]);
+        if(DynaMiner.getMiningSettings().isIdlingRandomly() && MethodProvider.random(100) <= MethodProvider.random(0, 5)) {
+            try {
+                api.sleep(sleepTime * MethodProvider.random(4, 10));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                api.sleep(sleepTime);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
