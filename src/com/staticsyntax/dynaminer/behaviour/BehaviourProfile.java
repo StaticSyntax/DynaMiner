@@ -36,7 +36,9 @@ public class BehaviourProfile {
     }
 
     private void randomiseAmountPerSwitch() {
-        amountPerSwitch = MethodProvider.random(DynaMiner.getApi().getInventory().getEmptySlots() / Rock.getTargets().length);
+        int amount = DynaMiner.getApi().getInventory().getEmptySlots() / Rock.getTargets().length;
+        if(amount <= 0) amount = 1;
+        amountPerSwitch = MethodProvider.random(amount);
     }
 
     public void incrementCurrentAmount() {
