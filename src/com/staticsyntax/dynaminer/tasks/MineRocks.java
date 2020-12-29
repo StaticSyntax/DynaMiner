@@ -30,8 +30,8 @@ public class MineRocks extends Task {
         if(rockObject != null) {
             if(api.getMap().canReach(rockObject)) {
                 rockObject.interact("Mine");
-                Sleep.waitCondition(() -> api.myPlayer().isAnimating(), 5000);
-                Sleep.waitCondition(() -> !api.myPlayer().isAnimating(), 60000);
+                Sleep.waitCondition(() -> api.myPlayer().isAnimating(), MethodProvider.random(2500, 5000));
+                Sleep.waitCondition(() -> !api.myPlayer().isAnimating(), MethodProvider.random(10000, 60000));
                 DynaMiner.getRngProfile().increaseFatigue();
             }
         }
