@@ -26,7 +26,7 @@ public class BehaviourProfile {
         randomiseAmountPerSwitch();
         currentAmount = 0;
         currentTarget = 0;
-        usingSimplePaths = MethodProvider.random(100) >= 50;
+        usingSimplePaths = MethodProvider.random(100) >= 75;
     }
 
     public void increaseFatigue() {
