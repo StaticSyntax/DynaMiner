@@ -31,7 +31,6 @@ public class DynaMiner extends Script {
     @Override
     public void onStart() {
         api = this;
-        paint = new Paint(this);
         initSettings();
         initTasks();
     }
@@ -88,6 +87,7 @@ public class DynaMiner extends Script {
     }
 
     public static void setRunning(boolean running) {
+        paint = new Paint(DynaMiner.getApi());
         DynaMiner.running = running;
     }
 
