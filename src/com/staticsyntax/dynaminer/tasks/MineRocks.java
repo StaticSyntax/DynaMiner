@@ -31,7 +31,7 @@ public class MineRocks extends Task {
 
     private void mineRock(RS2Object rockObject) {
         if(rockObject != null) {
-            if(api.getMap().canReach(rockObject)) {
+            if(api.getMap().canReach(rockObject) && Location.MINING.getArea().contains(rockObject)) {
                 rockObject.interact("Mine");
                 Sleep.waitCondition(() -> !rockObject.exists(), MethodProvider.random(10000, 60000));
                 DynaMiner.getBehaviourProfile().increaseFatigue();
