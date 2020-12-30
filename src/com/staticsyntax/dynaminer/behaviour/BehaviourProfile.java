@@ -11,6 +11,7 @@ public class BehaviourProfile {
     private int fatigue;
     private int[] sleepTime = new int[2];
     private int amountPerSwitch, currentAmount, currentTarget;
+    private boolean usingSimplePaths;
 
     public BehaviourProfile() {
         fatigue = 0;
@@ -25,6 +26,7 @@ public class BehaviourProfile {
         randomiseAmountPerSwitch();
         currentAmount = 0;
         currentTarget = 0;
+        usingSimplePaths = MethodProvider.random(100) >= 50;
     }
 
     public void increaseFatigue() {
@@ -55,5 +57,9 @@ public class BehaviourProfile {
 
     public int getCurrentTarget() {
         return currentTarget;
+    }
+
+    public boolean isUsingSimplePaths() {
+        return usingSimplePaths;
     }
 }

@@ -11,13 +11,10 @@ import org.osbot.rs07.script.Script;
 public class GetPickaxe extends Task {
 
     private Script script;
-    private WebWalkEvent webWalkEvent;
 
     public GetPickaxe(MethodProvider api, Script script) {
         super(api);
         this.script = script;
-        webWalkEvent = new WebWalkEvent(Location.getBanks());
-        webWalkEvent.setPathPreferenceProfile(Utils.getStandardPathPreferenceProfile());
     }
 
     @Override
@@ -27,7 +24,8 @@ public class GetPickaxe extends Task {
 
     @Override
     public void process() {
-        webWalkEvent.setEnergyThreshold(MethodProvider.random(1, 10));
+        WebWalkEvent webWalkEvent = new WebWalkEvent(Location.getBanks());
+        Utils.initWebWalkEvent(webWalkEvent);
         DynaMiner.getApi().execute(webWalkEvent);
         if(api.getBank().isOpen()) {
             if(Pickaxe.getBestUsableBanked() != null) {

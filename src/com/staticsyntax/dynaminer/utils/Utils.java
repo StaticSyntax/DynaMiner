@@ -1,12 +1,21 @@
 package com.staticsyntax.dynaminer.utils;
 
+import com.staticsyntax.dynaminer.DynaMiner;
+import org.osbot.rs07.event.WebWalkEvent;
 import org.osbot.rs07.event.webwalk.PathPreferenceProfile;
+import org.osbot.rs07.script.MethodProvider;
 
 import java.util.Arrays;
 
 public class Utils {
 
-    public static PathPreferenceProfile getStandardPathPreferenceProfile() {
+    public static void initWebWalkEvent(WebWalkEvent webWalkEvent) {
+        webWalkEvent.setPathPreferenceProfile(getStandardPathPreferenceProfile());
+        webWalkEvent.setEnergyThreshold(MethodProvider.random(1, 15));
+        if(DynaMiner.getBehaviourProfile().isUsingSimplePaths()) webWalkEvent.useSimplePath();
+    }
+
+    private static PathPreferenceProfile getStandardPathPreferenceProfile() {
         PathPreferenceProfile ppp = new PathPreferenceProfile();
         ppp.setAllowTeleports(true);
         return ppp;
