@@ -14,7 +14,7 @@ import java.net.URL;
 
 public class Settings implements ChangeListener {
 
-    private boolean powerMining, idlingRandomly, usingDepositBoxes;
+    private boolean powerMining, idlingRandomly, usingDepositBoxes, worldHopping;
 
     private final JDialog mainDialog;
     private final Dimension fillerDimension = new Dimension(0, 25);
@@ -116,20 +116,6 @@ public class Settings implements ChangeListener {
         powerMineCheckBox.setAlignmentX(Component.CENTER_ALIGNMENT);
         optionsPanel.add(powerMinePanel);
 
-        JPanel idlePanel = new JPanel();
-        idlePanel.setLayout(new BoxLayout(idlePanel, BoxLayout.PAGE_AXIS));
-        idlePanel.setBorder(new EmptyBorder(5, 15, 5, 15));
-        JLabel idleLabel = new JLabel("Randomly Idle");
-        idlePanel.add(idleLabel);
-        idleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        JCheckBox idleCheckBox = new JCheckBox();
-        idleCheckBox.setBackground(Color.CYAN);
-        idleCheckBox.setForeground(Color.BLACK);
-        idleCheckBox.addActionListener(e -> idlingRandomly = idleCheckBox.isSelected());
-        idlePanel.add(idleCheckBox);
-        idleCheckBox.setAlignmentX(Component.CENTER_ALIGNMENT);
-        optionsPanel.add(idlePanel);
-
         JPanel depositBoxPanel = new JPanel();
         depositBoxPanel.setLayout(new BoxLayout(depositBoxPanel, BoxLayout.PAGE_AXIS));
         depositBoxPanel.setBorder(new EmptyBorder(5, 15, 5, 15));
@@ -143,6 +129,34 @@ public class Settings implements ChangeListener {
         depositBoxPanel.add(depositBoxCheckBox);
         depositBoxCheckBox.setAlignmentX(Component.CENTER_ALIGNMENT);
         optionsPanel.add(depositBoxPanel);
+
+        JPanel hopWorldsPanel = new JPanel();
+        hopWorldsPanel.setLayout(new BoxLayout(hopWorldsPanel, BoxLayout.PAGE_AXIS));
+        hopWorldsPanel.setBorder(new EmptyBorder(5, 15, 5, 15));
+        JLabel hopWorldsLabel = new JLabel("Hop Worlds");
+        hopWorldsPanel.add(hopWorldsLabel);
+        hopWorldsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JCheckBox hopWorldsCheckBox = new JCheckBox();
+        hopWorldsCheckBox.setBackground(Color.CYAN);
+        hopWorldsCheckBox.setForeground(Color.BLACK);
+        hopWorldsCheckBox.addActionListener(e -> worldHopping = hopWorldsCheckBox.isSelected());
+        hopWorldsPanel.add(hopWorldsCheckBox);
+        hopWorldsCheckBox.setAlignmentX(Component.CENTER_ALIGNMENT);
+        optionsPanel.add(hopWorldsPanel);
+
+        JPanel idlePanel = new JPanel();
+        idlePanel.setLayout(new BoxLayout(idlePanel, BoxLayout.PAGE_AXIS));
+        idlePanel.setBorder(new EmptyBorder(5, 15, 5, 15));
+        JLabel idleLabel = new JLabel("Idle Randomly");
+        idlePanel.add(idleLabel);
+        idleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JCheckBox idleCheckBox = new JCheckBox();
+        idleCheckBox.setBackground(Color.CYAN);
+        idleCheckBox.setForeground(Color.BLACK);
+        idleCheckBox.addActionListener(e -> idlingRandomly = idleCheckBox.isSelected());
+        idlePanel.add(idleCheckBox);
+        idleCheckBox.setAlignmentX(Component.CENTER_ALIGNMENT);
+        optionsPanel.add(idlePanel);
         mainPanel.add(optionsPanel);
 
         mainPanel.add(new Box.Filler(fillerDimension, fillerDimension, fillerDimension));
@@ -186,6 +200,10 @@ public class Settings implements ChangeListener {
 
     public boolean isUsingDepositBoxes() {
         return usingDepositBoxes;
+    }
+
+    public boolean isWorldHopping() {
+        return worldHopping;
     }
 
     public int getRadius() {

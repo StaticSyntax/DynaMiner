@@ -80,6 +80,7 @@ public class DynaMiner extends Script {
         tasks.add(new WieldPickaxe(this));
         tasks.add(new PathToMiningLocation(this));
         tasks.add(new MineRocks(this));
+        tasks.add(new HopWorld(this));
         tasks.add(new Idle(this));
         tasks.add(new BankOres(this));
         tasks.add(new DropOres(this));
