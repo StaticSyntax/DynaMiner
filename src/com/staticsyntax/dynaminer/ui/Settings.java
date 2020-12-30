@@ -35,7 +35,7 @@ public class Settings implements ChangeListener {
         mainDialog.getContentPane().add(mainPanel);
 
         try {
-            JLabel logoLabel = new JLabel(new ImageIcon(new URL("https://i.imgur.com/bc6zxh8.png")));
+            JLabel logoLabel = new JLabel(new ImageIcon(new URL("https://i.imgur.com/JXpuvgW.png")));
             mainPanel.add(logoLabel);
             logoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         } catch (MalformedURLException e) {

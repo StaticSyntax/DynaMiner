@@ -1,4 +1,4 @@
-![alt text](https://i.imgur.com/bc6zxh8.png)  
+![alt text](https://i.imgur.com/JXpuvgW.png)  
 
 ## Features
 • Set your mining location and target rocks.  
@@ -11,4 +11,4 @@
 • Random idling and fatigue system in an attempt to imitate a real player.  
 
 ## Screenshots
-![alt text](https://i.imgur.com/Rj4kuBB.png)  
+![alt text](https://i.imgur.com/JtWhRl8.png)  

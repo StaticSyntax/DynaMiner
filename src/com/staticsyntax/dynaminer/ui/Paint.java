@@ -32,7 +32,7 @@ public class Paint {
 
     private void loadResources() {
         try {
-            logo = ImageIO.read(new URL("https://i.imgur.com/bc6zxh8.png"));
+            logo = ImageIO.read(new URL("https://i.imgur.com/JXpuvgW.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -56,18 +56,18 @@ public class Paint {
     }
 
     private void drawInfo(Graphics2D g) {
-        g.drawImage(logo, 5, 25, logo.getWidth() / 2, logo.getHeight() / 2, null);
+        g.drawImage(logo, 0, 25, logo.getWidth() / 2, logo.getHeight() / 2, null);
         drawStrings(g);
     }
 
     private void drawStrings(Graphics2D g) {
         g.setFont(monospaced_16);
         g.setColor(Color.WHITE);
-        g.drawString("Running Time: " + Sleep.msToString(System.currentTimeMillis() - startTime), 10, 110);
-        g.drawString("Current Task: " + currentTask, 10, 130);
-        g.drawString("Ores Mined: " + oresMined, 10, 150);
-        g.drawString("Mining Level: " + api.getSkills().getVirtualLevel(Skill.MINING) + " (+" + api.getExperienceTracker().getGainedLevels(Skill.MINING) + ")", 10, 170);
-        g.drawString("Exp Gained: " + api.getExperienceTracker().getGainedXP(Skill.MINING) + " (" + api.getExperienceTracker().getGainedXPPerHour(Skill.MINING) + "/hr)", 10, 190);
+        g.drawString("Running Time: " + Sleep.msToString(System.currentTimeMillis() - startTime), 10, 90);
+        g.drawString("Current Task: " + currentTask, 10, 110);
+        g.drawString("Ores Mined: " + oresMined, 10, 130);
+        g.drawString("Mining Level: " + api.getSkills().getVirtualLevel(Skill.MINING) + " (+" + api.getExperienceTracker().getGainedLevels(Skill.MINING) + ")", 10, 150);
+        g.drawString("Exp Gained: " + api.getExperienceTracker().getGainedXP(Skill.MINING) + " (" + api.getExperienceTracker().getGainedXPPerHour(Skill.MINING) + "/hr)", 10, 170);
     }
 
     private void drawCursor(Graphics2D g) {
