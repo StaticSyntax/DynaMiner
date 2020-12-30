@@ -1,6 +1,7 @@
 package com.staticsyntax.dynaminer;
 
 import com.staticsyntax.dynaminer.behaviour.BehaviourProfile;
+import com.staticsyntax.dynaminer.data.Rock;
 import com.staticsyntax.dynaminer.tasks.*;
 import com.staticsyntax.dynaminer.ui.Settings;
 import com.staticsyntax.dynaminer.ui.Paint;
@@ -60,6 +61,7 @@ public class DynaMiner extends Script {
     }
 
     private void initSettings() {
+        Rock.deselectAllTargets();
         settings = new Settings();
         try {
             SwingUtilities.invokeAndWait(() -> settings.open());

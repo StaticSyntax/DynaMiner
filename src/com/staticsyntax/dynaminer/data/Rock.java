@@ -116,4 +116,10 @@ public enum Rock {
     public void setTarget(boolean target) {
         this.target = target;
     }
+
+    public static void deselectAllTargets() {
+        for(Rock rock : Rock.values()) {
+            rock.target = false;
+        }
+    }
 }
