@@ -12,6 +12,7 @@ public class Utils {
     public static void initWebWalkEvent(WebWalkEvent webWalkEvent) {
         webWalkEvent.setPathPreferenceProfile(getStandardPathPreferenceProfile());
         webWalkEvent.setEnergyThreshold(MethodProvider.random(1, 15));
+        webWalkEvent.setMisclickThreshold(MethodProvider.random(1, 5));
         if(DynaMiner.getBehaviourProfile().isUsingSimplePaths()) webWalkEvent.useSimplePath();
     }
 
