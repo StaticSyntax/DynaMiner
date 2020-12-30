@@ -21,6 +21,7 @@ public class Settings implements ChangeListener {
     private final Font monoFont_12 = new Font("Monospaced", Font.BOLD, 12);
     private final JLabel radiusValueLabel;
     private final JSlider radiusSlider;
+    private final JButton startButton = new JButton("Start");
 
     public Settings() {
         mainDialog = new JDialog();
@@ -95,6 +96,7 @@ public class Settings implements ChangeListener {
             rockCheckBox.setForeground(Color.BLACK);
             int finalI = i;
             rockCheckBox.addActionListener(e -> Rock.values()[finalI].setTarget(rockCheckBox.isSelected()));
+            rockCheckBox.addActionListener(e -> startButton.setEnabled(rockCheckBox.isSelected()));
             rockPanel.add(rockCheckBox);
             rockCheckBox.setAlignmentX(Component.CENTER_ALIGNMENT);
             rockSelectionPanel.add(rockPanel);
@@ -172,7 +174,7 @@ public class Settings implements ChangeListener {
 
         mainPanel.add(new Box.Filler(fillerDimension, fillerDimension, fillerDimension));
 
-        JButton startButton = new JButton("Start");
+        startButton.setEnabled(false);
         startButton.setBackground(Color.CYAN);
         startButton.addActionListener(e -> {
             Location.setMiningArea();
