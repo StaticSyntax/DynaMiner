@@ -55,10 +55,14 @@ public class Settings implements ChangeListener {
 
         JPanel radiusPanel = new JPanel();
         radiusPanel.setLayout(new BoxLayout(radiusPanel, BoxLayout.PAGE_AXIS));
-        JLabel radiusLabel = new JLabel("Radius:");
+        JLabel radiusLabel = new JLabel("Radius");
         radiusPanel.add(radiusLabel);
         radiusLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         radiusSlider = new JSlider(1, 25, 5);
+        radiusSlider.setMinorTickSpacing(1);
+        radiusSlider.setMajorTickSpacing(5);
+        radiusSlider.setSnapToTicks(true);
+        radiusSlider.setPaintTicks(true);
         radiusSlider.setBackground(Color.CYAN);
         radiusSlider.addChangeListener(this);
         radiusPanel.add(radiusSlider);
@@ -72,7 +76,7 @@ public class Settings implements ChangeListener {
 
         JPanel targetRocksPanel = new JPanel();
         targetRocksPanel.setLayout(new BoxLayout(targetRocksPanel, BoxLayout.PAGE_AXIS));
-        JLabel targetRocksLabel = new JLabel("Target Rocks:");
+        JLabel targetRocksLabel = new JLabel("Target Rocks");
         targetRocksPanel.add(targetRocksLabel);
         targetRocksLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         targetRocksPanel.add(new Box.Filler(fillerDimension, fillerDimension, fillerDimension));
@@ -98,6 +102,13 @@ public class Settings implements ChangeListener {
         targetRocksPanel.add(rockSelectionPanel);
 
         mainPanel.add(new Box.Filler(fillerDimension, fillerDimension, fillerDimension));
+
+        JPanel optionsParentPanel = new JPanel();
+        optionsParentPanel.setLayout(new BoxLayout(optionsParentPanel, BoxLayout.PAGE_AXIS));
+        JLabel optionsLabel = new JLabel("Other Options");
+        optionsParentPanel.add(optionsLabel);
+        optionsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        mainPanel.add(optionsParentPanel);
 
         JPanel optionsPanel = new JPanel();
         optionsPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -157,7 +168,7 @@ public class Settings implements ChangeListener {
         idlePanel.add(idleCheckBox);
         idleCheckBox.setAlignmentX(Component.CENTER_ALIGNMENT);
         optionsPanel.add(idlePanel);
-        mainPanel.add(optionsPanel);
+        optionsParentPanel.add(optionsPanel);
 
         mainPanel.add(new Box.Filler(fillerDimension, fillerDimension, fillerDimension));
 
