@@ -11,4 +11,6 @@
 • Random idling and fatigue system in an attempt to imitate a real player.  
 
 ## Screenshots
+![alt text](https://i.imgur.com/P7nVFwD.png)  
+
 ![alt text](https://i.imgur.com/JtWhRl8.png)  
