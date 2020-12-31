@@ -1,7 +1,7 @@
 package com.staticsyntax.dynaminer.data;
 
-import com.staticsyntax.dynaminer.DynaMiner;
 import org.osbot.rs07.api.ui.Skill;
+import org.osbot.rs07.script.MethodProvider;
 
 public enum Pickaxe {
     BRONZE("Bronze pickaxe", 1, 1),
@@ -26,41 +26,41 @@ public enum Pickaxe {
         this.attackLevel = attackLevel;
     }
 
-    public boolean canUse() {
-        return canUse(this);
+    public boolean canUse(MethodProvider api) {
+        return canUse(this, api);
     }
 
-    public static boolean canUse(Pickaxe pickaxe) {
-        return DynaMiner.getApi().getSkills().getVirtualLevel(Skill.MINING) >= pickaxe.miningLevel;
+    public static boolean canUse(Pickaxe pickaxe, MethodProvider api) {
+        return api.getSkills().getVirtualLevel(Skill.MINING) >= pickaxe.miningLevel;
     }
 
-    public boolean canWield() {
-        return canWield(this);
+    public boolean canWield(MethodProvider api) {
+        return canWield(this, api);
     }
 
-    public static boolean canWield(Pickaxe pickaxe) {
-        return DynaMiner.getApi().getSkills().getVirtualLevel(Skill.ATTACK) >= pickaxe.attackLevel;
+    public static boolean canWield(Pickaxe pickaxe, MethodProvider api) {
+        return api.getSkills().getVirtualLevel(Skill.ATTACK) >= pickaxe.attackLevel;
     }
 
-    public static boolean playerHasUsable() {
-        return getCurrent() != null;
+    public static boolean playerHasUsable(MethodProvider api) {
+        return getCurrent(api) != null;
     }
 
-    public static Pickaxe getCurrent() {
+    public static Pickaxe getCurrent(MethodProvider api) {
         for(int i = Pickaxe.values().length - 1; i >= 0; i--) {
-            if((DynaMiner.getApi().getInventory().contains(Pickaxe.values()[i].name)
-             || DynaMiner.getApi().getEquipment().contains(Pickaxe.values()[i].name))
-             && DynaMiner.getApi().getSkills().getVirtualLevel(Skill.MINING) >= Pickaxe.values()[i].miningLevel) {
+            if((api.getInventory().contains(Pickaxe.values()[i].name)
+                    || api.getEquipment().contains(Pickaxe.values()[i].name))
+                    && api.getSkills().getVirtualLevel(Skill.MINING) >= Pickaxe.values()[i].miningLevel) {
                 return Pickaxe.values()[i];
             }
         }
         return null;
     }
 
-    public static Pickaxe getBestUsableBanked() {
+    public static Pickaxe getBestUsableBanked(MethodProvider api) {
         for(int i = Pickaxe.values().length - 1; i >= 0; i--) {
-            if(DynaMiner.getApi().getBank().contains(Pickaxe.values()[i].name)
-            && DynaMiner.getApi().getSkills().getVirtualLevel(Skill.MINING) >= Pickaxe.values()[i].miningLevel) {
+            if(api.getBank().contains(Pickaxe.values()[i].name)
+                    && api.getSkills().getVirtualLevel(Skill.MINING) >= Pickaxe.values()[i].miningLevel) {
                 return Pickaxe.values()[i];
             }
         }

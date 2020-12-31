@@ -1,6 +1,5 @@
 package com.staticsyntax.dynaminer.behaviour;
 
-import com.staticsyntax.dynaminer.DynaMiner;
 import com.staticsyntax.dynaminer.data.Rock;
 import org.osbot.rs07.script.MethodProvider;
 
@@ -8,12 +7,14 @@ import java.util.Arrays;
 
 public class BehaviourProfile {
 
+    private MethodProvider api;
     private int fatigue;
     private int[] sleepTime = new int[2];
     private int amountPerSwitch, currentAmount, currentTarget;
     private boolean usingSimplePaths;
 
-    public BehaviourProfile() {
+    public BehaviourProfile(MethodProvider api) {
+        this.api = api;
         fatigue = 0;
         generateNewProfile();
     }
@@ -30,7 +31,7 @@ public class BehaviourProfile {
     }
 
     public void increaseFatigue() {
-        fatigue += MethodProvider.random(1, 10);
+        fatigue += MethodProvider.random(1, 5);
     }
 
     public int getSleepTime() {
@@ -38,7 +39,7 @@ public class BehaviourProfile {
     }
 
     private void randomiseAmountPerSwitch() {
-        int amount = DynaMiner.getApi().getInventory().getEmptySlots() / Rock.getTargets().length;
+        int amount = api.getInventory().getEmptySlots() / Rock.getTargets(api).length;
         if(amount <= 0) amount = 1;
         amountPerSwitch = MethodProvider.random(amount);
     }
@@ -48,7 +49,7 @@ public class BehaviourProfile {
         if(currentAmount >= amountPerSwitch) {
             currentAmount = 0;
             currentTarget++;
-            if(currentTarget >= Rock.getTargets().length) {
+            if(currentTarget >= Rock.getTargets(api).length) {
                 currentTarget = 0;
                 randomiseAmountPerSwitch();
             }

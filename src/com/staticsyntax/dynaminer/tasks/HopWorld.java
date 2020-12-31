@@ -5,19 +5,18 @@ import com.staticsyntax.dynaminer.data.Location;
 import com.staticsyntax.dynaminer.data.Pickaxe;
 import com.staticsyntax.dynaminer.data.Rock;
 import com.staticsyntax.dynaminer.utils.Sleep;
-import org.osbot.rs07.script.MethodProvider;
 
 public class HopWorld extends Task {
 
-    public HopWorld(MethodProvider api) {
-        super(api);
+    public HopWorld(DynaMiner script) {
+        super(script);
     }
 
     @Override
     public boolean canProcess() {
-        return Pickaxe.playerHasUsable() && Location.MINING.getArea().contains(api.myPlayer()) && !api.getInventory().isFull()
-        && api.getObjects().closest(true, Rock.getTargets()[DynaMiner.getBehaviourProfile().getCurrentTarget()].getIds()) == null
-        && DynaMiner.getMiningSettings().isWorldHopping();
+        return Pickaxe.playerHasUsable(api) && Location.MINING.getArea().contains(api.myPlayer()) && !api.getInventory().isFull()
+                && api.getObjects().closest(true, Rock.getTargets(api)[script.getBehaviourProfile().getCurrentTarget()].getIds()) == null
+                && script.getMiningSettings().isWorldHopping();
     }
 
     @Override

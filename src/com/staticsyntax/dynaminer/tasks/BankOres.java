@@ -6,31 +6,30 @@ import com.staticsyntax.dynaminer.data.Pickaxe;
 import com.staticsyntax.dynaminer.data.Rock;
 import com.staticsyntax.dynaminer.utils.Utils;
 import org.osbot.rs07.event.WebWalkEvent;
-import org.osbot.rs07.script.MethodProvider;
 
 public class BankOres extends Task {
 
-    public BankOres(MethodProvider api) {
-        super(api);
+    public BankOres(DynaMiner script) {
+        super(script);
     }
 
     @Override
     public boolean canProcess() {
-        return Pickaxe.playerHasUsable() && !DynaMiner.getMiningSettings().isPowerMining() && api.getInventory().isFull();
+        return Pickaxe.playerHasUsable(api) && !script.getMiningSettings().isPowerMining() && api.getInventory().isFull();
     }
 
     @Override
     public void process() {
-        WebWalkEvent webWalkEvent = new WebWalkEvent(Location.getBanks());
-        Utils.initWebWalkEvent(webWalkEvent);
-        DynaMiner.getApi().execute(webWalkEvent);
+        WebWalkEvent webWalkEvent = new WebWalkEvent(Location.getBanks(api));
+        Utils.initWebWalkEvent(webWalkEvent, script);
+        script.getApi().execute(webWalkEvent);
 
         if(!api.getBank().isOpen() && !api.getDepositBox().isOpen()) {
             boolean depositBoxFound = false;
-            if(DynaMiner.getMiningSettings().isUsingDepositBoxes()) {
+            if(script.getMiningSettings().isUsingDepositBoxes()) {
                 depositBoxFound = api.getDepositBox().open();
             }
-            if(!DynaMiner.getMiningSettings().isUsingDepositBoxes() || !depositBoxFound) {
+            if(!script.getMiningSettings().isUsingDepositBoxes() || !depositBoxFound) {
                 openBank();
             }
         } else {
@@ -39,7 +38,7 @@ public class BankOres extends Task {
             } else if(api.getDepositBox().isOpen()) {
                 api.getDepositBox().depositAll(Rock.getAllOreNames());
             }
-            DynaMiner.getBehaviourProfile().generateNewProfile();
+            script.getBehaviourProfile().generateNewProfile();
         }
     }
 

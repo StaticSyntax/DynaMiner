@@ -1,19 +1,19 @@
 package com.staticsyntax.dynaminer.tasks;
 
+import com.staticsyntax.dynaminer.DynaMiner;
 import com.staticsyntax.dynaminer.data.Pickaxe;
-import org.osbot.rs07.script.MethodProvider;
 
 public class UpgradePickaxe extends Task {
 
-    public UpgradePickaxe(MethodProvider api) {
-        super(api);
+    public UpgradePickaxe(DynaMiner script) {
+        super(script);
     }
 
     @Override
     public boolean canProcess() {
-        if(Pickaxe.playerHasUsable() && api.getBank().isOpen() && !api.getInventory().isFull()) {
-            if(Pickaxe.getBestUsableBanked() != null) {
-                return Pickaxe.getCurrent().ordinal() < Pickaxe.getBestUsableBanked().ordinal();
+        if(Pickaxe.playerHasUsable(api) && api.getBank().isOpen() && !api.getInventory().isFull()) {
+            if(Pickaxe.getBestUsableBanked(api) != null) {
+                return Pickaxe.getCurrent(api).ordinal() < Pickaxe.getBestUsableBanked(api).ordinal();
             }
         }
         return false;
@@ -21,7 +21,7 @@ public class UpgradePickaxe extends Task {
 
     @Override
     public void process() {
-        String bestPickaxe = Pickaxe.getBestUsableBanked().getName();
+        String bestPickaxe = Pickaxe.getBestUsableBanked(api).getName();
         api.getBank().withdraw(bestPickaxe, 1);
     }
 }

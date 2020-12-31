@@ -9,11 +9,11 @@ import java.util.Arrays;
 
 public class Utils {
 
-    public static void initWebWalkEvent(WebWalkEvent webWalkEvent) {
+    public static void initWebWalkEvent(WebWalkEvent webWalkEvent, DynaMiner script) {
         webWalkEvent.setPathPreferenceProfile(getStandardPathPreferenceProfile());
         webWalkEvent.setEnergyThreshold(MethodProvider.random(1, 15));
         webWalkEvent.setMisclickThreshold(MethodProvider.random(1, 5));
-        if(DynaMiner.getBehaviourProfile().isUsingSimplePaths()) webWalkEvent.useSimplePath();
+        if(script.getBehaviourProfile().isUsingSimplePaths()) webWalkEvent.useSimplePath();
     }
 
     private static PathPreferenceProfile getStandardPathPreferenceProfile() {

@@ -1,7 +1,7 @@
 package com.staticsyntax.dynaminer.data;
 
-import com.staticsyntax.dynaminer.DynaMiner;
 import org.osbot.rs07.api.ui.Skill;
+import org.osbot.rs07.script.MethodProvider;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -70,12 +70,12 @@ public enum Rock {
         this.miningLevel = miningLevel;
     }
 
-    public boolean canMine() {
-        return canMine(this);
+    public boolean canMine(MethodProvider api) {
+        return canMine(this, api);
     }
 
-    public static boolean canMine(Rock rock) {
-        return DynaMiner.getApi().getSkills().getVirtualLevel(Skill.MINING) >= rock.miningLevel;
+    public static boolean canMine(Rock rock, MethodProvider api) {
+        return api.getSkills().getVirtualLevel(Skill.MINING) >= rock.miningLevel;
     }
 
     public int[] getIds() {
@@ -100,10 +100,10 @@ public enum Rock {
         return miningLevel;
     }
 
-    public static Rock[] getTargets() {
+    public static Rock[] getTargets(MethodProvider api) {
         ArrayList<Rock> targetRocks = new ArrayList<>();
         for(Rock rock : Rock.values()) {
-            if(rock.isTarget() && rock.canMine()) targetRocks.add(rock);
+            if(rock.isTarget() && rock.canMine(api)) targetRocks.add(rock);
         }
         Collections.reverse(targetRocks);
         return targetRocks.toArray(new Rock[0]);

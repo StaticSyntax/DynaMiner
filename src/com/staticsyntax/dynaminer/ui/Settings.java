@@ -14,7 +14,7 @@ import java.net.URL;
 
 public class Settings implements ChangeListener {
 
-    private boolean powerMining, idlingRandomly, usingDepositBoxes, worldHopping;
+    private DynaMiner script;
 
     private final JDialog mainDialog;
     private final Dimension fillerDimension = new Dimension(0, 25);
@@ -23,7 +23,11 @@ public class Settings implements ChangeListener {
     private final JSlider radiusSlider;
     private final JButton startButton = new JButton("Start");
 
-    public Settings() {
+    private boolean powerMining, idlingRandomly, usingDepositBoxes, worldHopping;
+
+    public Settings(DynaMiner script) {
+        this.script = script;
+
         mainDialog = new JDialog();
         mainDialog.setTitle("DynaMiner Settings");
         mainDialog.setModal(true);
@@ -177,9 +181,9 @@ public class Settings implements ChangeListener {
         startButton.setEnabled(false);
         startButton.setBackground(Color.CYAN);
         startButton.addActionListener(e -> {
-            Location.setMiningArea();
-            DynaMiner.initBehaviourProfile();
-            DynaMiner.setRunning(true);
+            Location.setMiningArea(script.getApi(), this);
+            script.initBehaviourProfile();
+            script.setRunning(true);
             close();
         });
         mainPanel.add(startButton);

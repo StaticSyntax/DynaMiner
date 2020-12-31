@@ -6,18 +6,18 @@ import org.osbot.rs07.script.MethodProvider;
 
 public class Idle extends Task {
 
-    public Idle(MethodProvider api) {
-        super(api);
+    public Idle(DynaMiner script) {
+        super(script);
     }
 
     @Override
     public boolean canProcess() {
-        return DynaMiner.getMiningSettings().isIdlingRandomly() && MethodProvider.random(100) <= 1;
+        return script.getMiningSettings().isIdlingRandomly() && MethodProvider.random(100) <= 1;
     }
 
     @Override
     public void process() {
         api.getMouse().moveOutsideScreen();
-        Sleep.waitCondition(() -> api.myPlayer().isUnderAttack(), DynaMiner.getBehaviourProfile().getSleepTime() * MethodProvider.random(6, 12));
+        Sleep.waitCondition(() -> api.myPlayer().isUnderAttack(), script.getBehaviourProfile().getSleepTime() * MethodProvider.random(6, 12));
     }
 }

@@ -3,8 +3,8 @@ package com.staticsyntax.dynaminer;
 import com.staticsyntax.dynaminer.behaviour.BehaviourProfile;
 import com.staticsyntax.dynaminer.data.Rock;
 import com.staticsyntax.dynaminer.tasks.*;
-import com.staticsyntax.dynaminer.ui.Settings;
 import com.staticsyntax.dynaminer.ui.Paint;
+import com.staticsyntax.dynaminer.ui.Settings;
 import org.osbot.rs07.api.ui.Message;
 import org.osbot.rs07.script.MethodProvider;
 import org.osbot.rs07.script.Script;
@@ -22,12 +22,13 @@ import java.util.ArrayList;
         author = "StaticSyntax")
 public class DynaMiner extends Script {
 
-    private static boolean running = false;
-    private static MethodProvider api;
-    private static BehaviourProfile behaviourProfile;
-    private static Settings settings;
-    private static Paint paint;
+    private boolean running = false;
     private ArrayList<Task> tasks = new ArrayList<>();
+
+    private MethodProvider api;
+    private BehaviourProfile behaviourProfile;
+    private Settings settings;
+    private Paint paint;
 
     @Override
     public void onStart() {
@@ -40,7 +41,6 @@ public class DynaMiner extends Script {
     public int onLoop() {
         if(running) {
             for(Task task : tasks) {
-                if(task.canProcess()) paint.setCurrentTask(task.getClass().getSimpleName());
                 task.run();
             }
         }
@@ -49,7 +49,9 @@ public class DynaMiner extends Script {
 
     @Override
     public void onPaint(Graphics2D g) {
-        paint.draw(g);
+        if(running) {
+            paint.draw(g);
+        }
     }
 
     @Override
@@ -62,7 +64,7 @@ public class DynaMiner extends Script {
 
     private void initSettings() {
         Rock.deselectAllTargets();
-        settings = new Settings();
+        settings = new Settings(this);
         try {
             SwingUtilities.invokeAndWait(() -> settings.open());
         } catch (InterruptedException | InvocationTargetException e) {
@@ -76,9 +78,10 @@ public class DynaMiner extends Script {
     }
 
     private void initTasks() {
-        tasks.add(new GetPickaxe(this, this));
+        tasks.add(new GetPickaxe(this));
         tasks.add(new BankJunk(this));
         tasks.add(new WieldPickaxe(this));
+        tasks.add(new OrganiseInventory(this));
         tasks.add(new PathToMiningLocation(this));
         tasks.add(new MineRocks(this));
         tasks.add(new HopWorld(this));
@@ -88,24 +91,28 @@ public class DynaMiner extends Script {
         tasks.add(new UpgradePickaxe(this));
     }
 
-    public static void setRunning(boolean running) {
-        paint = new Paint(DynaMiner.getApi());
-        DynaMiner.running = running;
+    public void setRunning(boolean running) {
+        paint = new Paint(this);
+        this.running = running;
     }
 
-    public static MethodProvider getApi() {
+    public MethodProvider getApi() {
         return api;
     }
 
-    public static void initBehaviourProfile() {
-        behaviourProfile = new BehaviourProfile();
+    public void initBehaviourProfile() {
+        behaviourProfile = new BehaviourProfile(this);
     }
 
-    public static BehaviourProfile getBehaviourProfile() {
+    public BehaviourProfile getBehaviourProfile() {
         return behaviourProfile;
     }
 
-    public static Settings getMiningSettings() {
+    public Settings getMiningSettings() {
         return settings;
+    }
+
+    public Paint getPaint() {
+        return paint;
     }
 }

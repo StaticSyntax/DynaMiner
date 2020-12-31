@@ -1,8 +1,9 @@
 package com.staticsyntax.dynaminer.data;
 
-import com.staticsyntax.dynaminer.DynaMiner;
+import com.staticsyntax.dynaminer.ui.Settings;
 import org.osbot.rs07.api.map.Area;
 import org.osbot.rs07.api.map.constants.Banks;
+import org.osbot.rs07.script.MethodProvider;
 
 import java.util.ArrayList;
 
@@ -60,8 +61,8 @@ public enum Location {
     private Area area;
     private boolean membersOnly;
 
-    public static Area[] getBanks() {
-        boolean includeMembersBanks = DynaMiner.getApi().getWorlds().isMembersWorld();
+    public static Area[] getBanks(MethodProvider api) {
+        boolean includeMembersBanks = api.getWorlds().isMembersWorld();
         ArrayList<Area> bankAreas = new ArrayList<>();
         for(int i = 1; i < Location.values().length; i++) {
             if(includeMembersBanks) {
@@ -73,12 +74,12 @@ public enum Location {
         return bankAreas.toArray(new Area[0]);
     }
 
-    public static void setMiningArea() {
+    public static void setMiningArea(MethodProvider api, Settings miningSettings) {
         int x1, y1, x2, y2;
-        x1 = DynaMiner.getApi().myPosition().getX() - DynaMiner.getMiningSettings().getRadius();
-        y1 = DynaMiner.getApi().myPosition().getY() + DynaMiner.getMiningSettings().getRadius();
-        x2 = DynaMiner.getApi().myPosition().getX() + DynaMiner.getMiningSettings().getRadius();
-        y2 = DynaMiner.getApi().myPosition().getY() - DynaMiner.getMiningSettings().getRadius();
+        x1 = api.myPosition().getX() - miningSettings.getRadius();
+        y1 = api.myPosition().getY() + miningSettings.getRadius();
+        x2 = api.myPosition().getX() + miningSettings.getRadius();
+        y2 = api.myPosition().getY() - miningSettings.getRadius();
         Location.MINING.area = new Area(x1, y1, x2, y2);
     }
 
