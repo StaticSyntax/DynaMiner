@@ -23,7 +23,7 @@ public class Settings implements ChangeListener {
     private final JSlider radiusSlider;
     private final JButton startButton = new JButton("Start");
 
-    private boolean powerMining, idlingRandomly, usingDepositBoxes, worldHopping;
+    private boolean powerMining, idlingRandomly, usingDepositBoxes, worldHopping, fatigueEnabled;
 
     public Settings(DynaMiner script) {
         this.script = script;
@@ -174,6 +174,20 @@ public class Settings implements ChangeListener {
         idlePanel.add(idleCheckBox);
         idleCheckBox.setAlignmentX(Component.CENTER_ALIGNMENT);
         optionsPanel.add(idlePanel);
+
+        JPanel fatiguePanel = new JPanel();
+        fatiguePanel.setLayout(new BoxLayout(fatiguePanel, BoxLayout.PAGE_AXIS));
+        fatiguePanel.setBorder(new EmptyBorder(5, 15, 5, 15));
+        JLabel fatigueLabel = new JLabel("Fatigue System");
+        fatiguePanel.add(fatigueLabel);
+        fatigueLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JCheckBox fatigueCheckBox = new JCheckBox();
+        fatigueCheckBox.setBackground(Color.CYAN);
+        fatigueCheckBox.setForeground(Color.BLACK);
+        fatigueCheckBox.addActionListener(e -> fatigueEnabled = fatigueCheckBox.isSelected());
+        fatiguePanel.add(fatigueCheckBox);
+        fatigueCheckBox.setAlignmentX(Component.CENTER_ALIGNMENT);
+        optionsPanel.add(fatiguePanel);
         optionsParentPanel.add(optionsPanel);
 
         mainPanel.add(new Box.Filler(fillerDimension, fillerDimension, fillerDimension));
@@ -221,6 +235,10 @@ public class Settings implements ChangeListener {
 
     public boolean isWorldHopping() {
         return worldHopping;
+    }
+
+    public boolean isFatigueEnabled() {
+        return fatigueEnabled;
     }
 
     public int getRadius() {

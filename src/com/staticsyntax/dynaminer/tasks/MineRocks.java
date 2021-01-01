@@ -32,7 +32,9 @@ public class MineRocks extends Task {
             if(Location.MINING.getArea().contains(rockObject)) {
                 if(rockObject.interact("Mine")) {
                     Sleep.waitCondition(() -> !rockObject.exists(), MethodProvider.random(10000, 60000));
-                    script.getBehaviourProfile().increaseFatigue();
+                    if(script.getMiningSettings().isFatigueEnabled()) {
+                        script.getBehaviourProfile().increaseFatigue();
+                    }
                 }
             }
         }

@@ -32,6 +32,7 @@ public class BehaviourProfile {
 
     public void increaseFatigue() {
         fatigue += MethodProvider.random(1, 5);
+        api.log("Increasing fatigue. Total: " + fatigue);
     }
 
     public int getSleepTime() {
