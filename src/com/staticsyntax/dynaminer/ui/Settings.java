@@ -29,7 +29,7 @@ public class Settings implements ChangeListener {
         this.script = script;
 
         mainDialog = new JDialog();
-        mainDialog.setTitle("DynaMiner Settings");
+        mainDialog.setTitle("DynaMiner");
         mainDialog.setModal(true);
         mainDialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
 

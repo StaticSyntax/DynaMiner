@@ -7,10 +7,12 @@ public abstract class Task {
 
     protected DynaMiner script;
     protected MethodProvider api;
+    protected String name;
 
-    public Task(DynaMiner script) {
+    public Task(DynaMiner script, String name) {
         this.script = script;
         api = script.getApi();
+        this.name = name;
     }
 
     public abstract boolean canProcess();
@@ -19,7 +21,7 @@ public abstract class Task {
 
     public void run() {
         if(canProcess()) {
-            script.getPaint().setCurrentTask(this.getClass().getSimpleName());
+            script.getPaint().setCurrentTask(name);
             process();
         }
     }

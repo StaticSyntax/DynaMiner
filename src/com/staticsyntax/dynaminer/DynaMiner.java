@@ -18,7 +18,7 @@ import java.util.ArrayList;
 @ScriptManifest(logo = "https://i.imgur.com/W3RQhXk.png",
         name = "DynaMiner",
         info = "Static Scripts",
-        version = 1.0,
+        version = 1.01,
         author = "StaticSyntax")
 public class DynaMiner extends Script {
 
@@ -32,6 +32,7 @@ public class DynaMiner extends Script {
 
     @Override
     public void onStart() {
+        log(getName() + " " + getVersion());
         api = this;
         initSettings();
         initTasks();
@@ -78,17 +79,17 @@ public class DynaMiner extends Script {
     }
 
     private void initTasks() {
-        tasks.add(new GetPickaxe(this));
-        tasks.add(new BankJunk(this));
-        tasks.add(new WieldPickaxe(this));
-        tasks.add(new OrganiseInventory(this));
-        tasks.add(new PathToMiningLocation(this));
-        tasks.add(new MineRocks(this));
-        tasks.add(new HopWorld(this));
-        tasks.add(new Idle(this));
-        tasks.add(new BankOres(this));
-        tasks.add(new DropOres(this));
-        tasks.add(new UpgradePickaxe(this));
+        tasks.add(new GetPickaxe(this, "GetPickaxe"));
+        tasks.add(new BankJunk(this, "BankJunk"));
+        tasks.add(new WieldPickaxe(this, "WieldPickaxe"));
+        tasks.add(new OrganiseInventory(this, "OrganiseInventory"));
+        tasks.add(new PathToMiningLocation(this, "PathToMiningLocation"));
+        tasks.add(new MineRocks(this, "MineRocks"));
+        tasks.add(new HopWorld(this, "HopWorld"));
+        tasks.add(new Idle(this, "Idle"));
+        tasks.add(new BankOres(this, "BankOres"));
+        tasks.add(new DropOres(this, "DropOres"));
+        tasks.add(new UpgradePickaxe(this, "UpgradePickaxe"));
     }
 
     public void setRunning(boolean running) {

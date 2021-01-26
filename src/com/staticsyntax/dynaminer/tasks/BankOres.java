@@ -9,8 +9,8 @@ import org.osbot.rs07.event.WebWalkEvent;
 
 public class BankOres extends Task {
 
-    public BankOres(DynaMiner script) {
-        super(script);
+    public BankOres(DynaMiner script, String name) {
+        super(script, name);
     }
 
     @Override

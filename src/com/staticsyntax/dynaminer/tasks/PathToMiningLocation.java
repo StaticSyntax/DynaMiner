@@ -8,8 +8,8 @@ import org.osbot.rs07.event.WebWalkEvent;
 
 public class PathToMiningLocation extends Task {
 
-    public PathToMiningLocation(DynaMiner script) {
-        super(script);
+    public PathToMiningLocation(DynaMiner script, String name) {
+        super(script, name);
     }
 
     @Override
@@ -20,11 +20,7 @@ public class PathToMiningLocation extends Task {
     @Override
     public void process() {
         WebWalkEvent webWalkEvent;
-        if(script.getMiningSettings().getRadius() == 1) {
-            webWalkEvent = new WebWalkEvent(Location.MINING.getArea().getRandomPosition());
-        } else {
-            webWalkEvent = new WebWalkEvent(Location.MINING.getArea().getCentralPosition());
-        }
+        webWalkEvent = new WebWalkEvent(Location.MINING.getArea().getRandomPosition());
         Utils.initWebWalkEvent(webWalkEvent, script);
         script.getApi().execute(webWalkEvent);
     }

@@ -7,8 +7,8 @@ import com.staticsyntax.dynaminer.utils.Utils;
 
 public class BankJunk extends Task {
 
-    public BankJunk(DynaMiner script) {
-        super(script);
+    public BankJunk(DynaMiner script, String name) {
+        super(script, name);
     }
 
     @Override

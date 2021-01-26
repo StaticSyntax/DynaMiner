@@ -13,7 +13,7 @@ public class Utils {
         webWalkEvent.setPathPreferenceProfile(getStandardPathPreferenceProfile());
         webWalkEvent.setEnergyThreshold(MethodProvider.random(1, 15));
         webWalkEvent.setMisclickThreshold(MethodProvider.random(1, 5));
-        if(script.getBehaviourProfile().isUsingSimplePaths()) webWalkEvent.useSimplePath();
+        webWalkEvent.useSimplePath();
     }
 
     private static PathPreferenceProfile getStandardPathPreferenceProfile() {

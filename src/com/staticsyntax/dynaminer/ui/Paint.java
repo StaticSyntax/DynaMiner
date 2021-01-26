@@ -62,8 +62,8 @@ public class Paint {
     private void drawStrings(Graphics2D g) {
         g.setFont(monospaced_16);
         g.setColor(Color.WHITE);
-        g.drawString("Running Time: " + Sleep.msToString(System.currentTimeMillis() - startTime), 10, 90);
-        g.drawString("Current Task: " + currentTask, 10, 110);
+        g.drawString("Runtime: " + Sleep.msToString(System.currentTimeMillis() - startTime), 10, 90);
+        g.drawString("Task: " + currentTask, 10, 110);
         g.drawString("Ores Mined: " + oresMined, 10, 130);
         g.drawString("Mining Level: " + api.getSkills().getVirtualLevel(Skill.MINING) + " (+" + api.getExperienceTracker().getGainedLevels(Skill.MINING) + ")", 10, 150);
         g.drawString("Exp Gained: " + api.getExperienceTracker().getGainedXP(Skill.MINING) + " (" + api.getExperienceTracker().getGainedXPPerHour(Skill.MINING) + "/hr)", 10, 170);

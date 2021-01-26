@@ -11,7 +11,6 @@ public class BehaviourProfile {
     private int fatigue;
     private int[] sleepTime = new int[2];
     private int amountPerSwitch, currentAmount, currentTarget;
-    private boolean usingSimplePaths;
 
     public BehaviourProfile(MethodProvider api) {
         this.api = api;
@@ -21,18 +20,16 @@ public class BehaviourProfile {
 
     public void generateNewProfile() {
         for(int i = 0; i < sleepTime.length; i++) {
-            sleepTime[i] = MethodProvider.random(750, 1250);
+            sleepTime[i] = MethodProvider.random(700, 1000);
         }
         Arrays.sort(sleepTime);
         randomiseAmountPerSwitch();
         currentAmount = 0;
         currentTarget = 0;
-        usingSimplePaths = MethodProvider.random(100) >= 75;
     }
 
     public void increaseFatigue() {
         fatigue += MethodProvider.random(1, 5);
-        api.log("Increasing fatigue. Total: " + fatigue);
     }
 
     public int getSleepTime() {
@@ -59,9 +56,5 @@ public class BehaviourProfile {
 
     public int getCurrentTarget() {
         return currentTarget;
-    }
-
-    public boolean isUsingSimplePaths() {
-        return usingSimplePaths;
     }
 }

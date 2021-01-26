@@ -8,8 +8,8 @@ import com.staticsyntax.dynaminer.utils.Sleep;
 
 public class HopWorld extends Task {
 
-    public HopWorld(DynaMiner script) {
-        super(script);
+    public HopWorld(DynaMiner script, String name) {
+        super(script, name);
     }
 
     @Override

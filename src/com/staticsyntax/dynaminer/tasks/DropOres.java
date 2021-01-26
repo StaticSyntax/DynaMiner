@@ -6,8 +6,8 @@ import com.staticsyntax.dynaminer.data.Rock;
 
 public class DropOres extends Task {
 
-    public DropOres(DynaMiner script) {
-        super(script);
+    public DropOres(DynaMiner script, String name) {
+        super(script, name);
     }
 
     @Override

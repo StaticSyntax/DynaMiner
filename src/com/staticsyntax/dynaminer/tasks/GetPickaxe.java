@@ -8,8 +8,8 @@ import org.osbot.rs07.event.WebWalkEvent;
 
 public class GetPickaxe extends Task {
 
-    public GetPickaxe(DynaMiner script) {
-        super(script);
+    public GetPickaxe(DynaMiner script, String name) {
+        super(script, name);
     }
 
     @Override

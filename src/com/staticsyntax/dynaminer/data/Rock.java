@@ -49,7 +49,7 @@ public enum Rock {
     MITHRIL(new int[] {11372, 11373},
             new String[] {"Mithril ore"},
             55),
-    ADAMANT(new int[] {11374, 11375},
+    ADAMANTITE(new int[] {11374, 11375},
             new String[] {"Adamantite ore"},
             70),
     RUNITE(new int[] {11376, 11377},

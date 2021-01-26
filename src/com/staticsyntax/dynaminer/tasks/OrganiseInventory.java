@@ -6,8 +6,8 @@ import org.osbot.rs07.utility.Condition;
 
 public class OrganiseInventory extends Task {
 
-    public OrganiseInventory(DynaMiner script) {
-        super(script);
+    public OrganiseInventory(DynaMiner script, String name) {
+        super(script, name);
     }
 
     @Override

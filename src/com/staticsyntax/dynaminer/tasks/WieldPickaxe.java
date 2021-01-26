@@ -6,8 +6,8 @@ import com.staticsyntax.dynaminer.utils.Sleep;
 
 public class WieldPickaxe extends Task {
 
-    public WieldPickaxe(DynaMiner script) {
-        super(script);
+    public WieldPickaxe(DynaMiner script, String name) {
+        super(script, name);
     }
 
     @Override

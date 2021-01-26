@@ -5,8 +5,8 @@ import com.staticsyntax.dynaminer.data.Pickaxe;
 
 public class UpgradePickaxe extends Task {
 
-    public UpgradePickaxe(DynaMiner script) {
-        super(script);
+    public UpgradePickaxe(DynaMiner script, String name) {
+        super(script, name);
     }
 
     @Override

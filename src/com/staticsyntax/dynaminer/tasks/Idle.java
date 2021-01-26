@@ -6,8 +6,8 @@ import org.osbot.rs07.script.MethodProvider;
 
 public class Idle extends Task {
 
-    public Idle(DynaMiner script) {
-        super(script);
+    public Idle(DynaMiner script, String name) {
+        super(script, name);
     }
 
     @Override

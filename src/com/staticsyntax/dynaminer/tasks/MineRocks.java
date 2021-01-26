@@ -11,8 +11,8 @@ import org.osbot.rs07.script.MethodProvider;
 
 public class MineRocks extends Task {
 
-    public MineRocks(DynaMiner script) {
-        super(script);
+    public MineRocks(DynaMiner script, String name) {
+        super(script, name);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class MineRocks extends Task {
         if(rockObject != null) {
             if(Location.MINING.getArea().contains(rockObject)) {
                 if(rockObject.interact("Mine")) {
-                    Sleep.waitCondition(() -> !rockObject.exists(), MethodProvider.random(10000, 60000));
+                    Sleep.waitCondition(() -> !rockObject.exists(), MethodProvider.random(10000, 30000));
                     if(script.getMiningSettings().isFatigueEnabled()) {
                         script.getBehaviourProfile().increaseFatigue();
                     }
